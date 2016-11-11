@@ -1,16 +1,17 @@
-DROP TABLE IF EXISTS video_game;
-DROP TABLE IF EXISTS developer;
-DROP TABLE IF EXISTS genre;
-DROP TABLE IF EXISTS game_series;
-DROP TABLE IF EXISTS game_genres;
-DROP TABLE IF EXISTS people;
-DROP TABLE IF EXISTS job;
-DROP TABLE IF EXISTS platform;
-DROP TABLE IF EXISTS game_character;
-DROP TABLE IF EXISTS game_platforms;
-DROP TABLE IF EXISTS game_char;
+SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS people_jobs;
-
+DROP TABLE IF EXISTS game_char;
+DROP TABLE IF EXISTS game_platforms;
+DROP TABLE IF EXISTS game_character;
+DROP TABLE IF EXISTS platform;
+DROP TABLE IF EXISTS job;
+DROP TABLE IF EXISTS people;
+DROP TABLE IF EXISTS game_genres;
+DROP TABLE IF EXISTS video_game;
+DROP TABLE IF EXISTS game_series;
+DROP TABLE IF EXISTS game_series;
+DROP TABLE IF EXISTS genre;
+DROP TABLE IF EXISTS developer;
 
 -- Creates a table named developer with the following properties
 -- id: an auto incrementing integer which is the primary key
@@ -163,5 +164,5 @@ PRIMARY KEY (person_id, game_id, job_id),
 CONSTRAINT FOREIGN KEY (person_id) REFERENCES people (person_id),
 CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id),
 CONSTRAINT FOREIGN KEY (job_id) REFERENCES job (job_id),
-CONSTRAINT FOREIGN KEY (develop_id) REFERENCES developer (develop_id)
+CONSTRAINT FOREIGN KEY (develop_id) REFERENCES developer (developer_id)
 ) Engine=InnoDB;
