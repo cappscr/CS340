@@ -3,7 +3,7 @@ SET AUTOCOMMIT=0;
 INSERT INTO developer (name, city) VALUES
 ('Bethesda Game Studio', 'Rockville'),
 ('Niantic Labs', 'San Francisco'), 
-('Hello Games', 'Guildford')
+('Hello Games', 'Guildford'),
 ('Blizzard', 'Irvine'),
 ('Turn 10 Studios', 'Redmond'),
 ('Infinity Ward', 'Encino'),
@@ -46,7 +46,7 @@ COMMIT;
 
 -- Character inserts
 SET AUTOCOMMIT=0; 
-INSERT INTO game_char (name) VALUES ("Pikachu"), ("Master Chief"), ("Lara Croft"), ("Sonic"), ("Super Mario"), ("Spyro");
+INSERT INTO game_character (name) VALUES ("Pikachu"), ("Master Chief"), ("Lara Croft"), ("Sonic"), ("Super Mario"), ("Spyro");
 COMMIT;
 
 
@@ -66,7 +66,7 @@ COMMIT;
 -- people inserts without birthdays
 SET AUTOCOMMIT=0;
 INSERT INTO people (firstName, lastName) VALUES 
-("Guy", "Carver"), ("Jeremy", "Soule"), ("Matthew Carofano"), ("Craig", "Walton"), ("Inon Zur"),
+("Guy", "Carver"), ("Jeremy", "Soule"), ("Matthew", "Carofano"), ("Craig", "Walton"), ("Inon", "Zur"),
 ("Istvan", "Pely"), ("Harry", "Denholm"), ("Ryan", "Doyle"), ("Innes", "McKendrick"), ("Sean", "Murray"),
 ("David", "Ream"), ("Paul", "Weir"), ("Grant", "Duncan"), ("Jacob", "Golding");
 COMMIT;
@@ -89,7 +89,7 @@ COMMIT;
 SET AUTOCOMMIT=0;
 INSERT INTO platform (name, manufacturer, cost, releaseMonth, releaseDay, releaseYear, graphics, RAM) VALUES
 ("Playstation", "Sony", "300.00", 9, 9, 1995, "GPU and Geometry Transformation Engine (GTE)", "2 MB"),
-("Xbox", "Microsoft", "", "400.00", 11, 15, 2001, "Nvidia NV2A", "64 MB"), 
+("Xbox", "Microsoft", "400.00", 11, 15, 2001, "Nvidia NV2A", "64 MB"), 
 ("Playstation 2", "Sony", "299.00", 10, 26, 2000, "GS Core: Parallel Rendering Processor with embeddedd DRAM", "32 MB"),
 ("Xbox 360", "Microsoft", "", 11, 22, 2005, "ATI Xenos", "512 MB");
 COMMIT;
