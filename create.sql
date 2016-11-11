@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS video_game;
 DROP TABLE IF EXISTS game_series;
 DROP TABLE IF EXISTS genre;
 DROP TABLE IF EXISTS developer;
+SET FOREIGN_KEY_CHECKS=1;
 
 -- Creates a table named developer with the following properties
 -- id: an auto incrementing integer which is the primary key
