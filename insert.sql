@@ -114,13 +114,13 @@ COMMIT;
 -- Insert data into video_game
 SET AUTOCOMMIT=0;
 INSERT INTO video_game VALUES
-('The Elder Scrolls V: Skyrim', 11, 11, 2011, (SELECT series_id FROM game_series WHERE name = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
-('The Elder Scrolls IV: Oblivion', 3, 20, 2006, (SELECT series_id FROM game_series WHERE name = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
-('Fallout 4', 11, 10, 2015, (SELECT series_id FROM game_series WHERE name = 'Fallout'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
-('Pokemon Go', 7, 6, 2016, (SELECT series_id FROM game_series WHERE name = 'Pokemon'), (SELECT developer_id FROM developer WHERE name = 'Niantic Labs')),
+('The Elder Scrolls V: Skyrim', 11, 11, 2011, (SELECT series_id FROM game_series WHERE title = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
+('The Elder Scrolls IV: Oblivion', 3, 20, 2006, (SELECT series_id FROM game_series WHERE title = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
+('Fallout 4', 11, 10, 2015, (SELECT series_id FROM game_series WHERE title = 'Fallout'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
+('Pokemon Go', 7, 6, 2016, (SELECT series_id FROM game_series WHERE title = 'Pokemon'), (SELECT developer_id FROM developer WHERE name = 'Niantic Labs')),
 ('No Man Sky', 8, 9, 2016, NULL, (SELECT developer_id FROM developer WHERE name = 'Hello Games')),
-('Pokemon Snap' 3, 21, 1999, (SELECT series_id FROM game_series WHERE name = 'Pokemon'), (SELECT developer_id FROM developer WHERE name = 'HAL Laboratory, Inc.'),
-('Diablo II', 6, 29, 2000, (SELECT series_id FROM game_series WHERE name = 'Diablo'), (SELECT developer_id FROM developer WHERE name = 'Blizzard');
+('Pokemon Snap' 3, 21, 1999, (SELECT series_id FROM game_series WHERE title = 'Pokemon'), (SELECT developer_id FROM developer WHERE name = 'HAL Laboratory, Inc.')),
+('Diablo II', 6, 29, 2000, (SELECT series_id FROM game_series WHERE title = 'Diablo'), (SELECT developer_id FROM developer WHERE name = 'Blizzard'));
 COMMIT;
 
 
