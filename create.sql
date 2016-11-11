@@ -1,7 +1,7 @@
---Creates a table named developer with the following properties
---id - an auto incrementing integer which is the primary key
---name - name of the developer, cannot be null
---city - city that the developer is located in
+-- Creates a table named developer with the following properties
+-- id: an auto incrementing integer which is the primary key
+-- name: name of the developer, cannot be null
+-- city: city that the developer is located in
 CREATE TABLE developer(
 	developer_id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
@@ -10,9 +10,9 @@ CREATE TABLE developer(
 	UNIQUE (name)
 ) ENGINE = InnoDB;
 
---Creates a table named genre with the following properties
---id - an auto incrementing integer which is the primary key
---name - name of the genre, cannot be null
+-- Creates a table named genre with the following properties
+-- id - an auto incrementing integer which is the primary key
+-- name - name of the genre, cannot be null
 CREATE TABLE genre(
 	genre_id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
@@ -20,9 +20,9 @@ CREATE TABLE genre(
 	UNIQUE(name)
 ) ENGINE = InnoDB;
 
---Creates a table named game_series with the following properties
---id - an auto incrementing integer which is the primary key
---title - tile of the series, cannot be null
+-- Creates a table named game_series with the following properties
+-- id - an auto incrementing integer which is the primary key
+-- title - tile of the series, cannot be null
 CREATE TABLE game_series(
 	series_id INT NOT NULL AUTO_INCREMENT,
 	title varchar(255) NOT NULL,
@@ -30,16 +30,16 @@ CREATE TABLE game_series(
 	UNIQUE(title)
 ) ENGINE = InnoDB;
 
---Creates a table named video_game with the following properties
---id - an auto incrementing integer which is the primary key
---title - name of the videogame, cannot be null
---releaseMonth - month of the year the game came out as an integer
---releaseDay - day of the month the game came out as an integer
---releaseYear- year the game came out as an integer
---gameSeries - id of the game series that the game belongs to
---developer - id of the developer of the game
---title, releaseMonth, releaseDay, releaseYear combo must be unique
---incase same name is used twice (e.g. Doom)
+-- Creates a table named video_game with the following properties
+-- id - an auto incrementing integer which is the primary key
+-- title - name of the videogame, cannot be null
+-- releaseMonth - month of the year the game came out as an integer
+-- releaseDay - day of the month the game came out as an integer
+-- releaseYear- year the game came out as an integer
+-- gameSeries - id of the game series that the game belongs to
+-- developer - id of the developer of the game
+-- title, releaseMonth, releaseDay, releaseYear combo must be unique
+-- incase same name is used twice (e.g. Doom)
 CREATE TABLE video_game(
 	game_id INT NOT NULL AUTO_INCREMENT,
 	title varchar(255) NOT NULL,
@@ -54,9 +54,9 @@ CREATE TABLE video_game(
 	UNIQUE KEY(title, releaseMonth, releaseDay, releaseYear)
 ) ENGINE = InnoDB;
 
---Creates a table named game_genres with the following properties
---game_id - id of game being referenced
---genre_id - id of genre being referenced
+-- Creates a table named game_genres with the following properties
+-- game_id - id of game being referenced
+-- genre_id - id of genre being referenced
 CREATE TABLE game_genres(
 	game_id INT NOT NULL,
 	genre_id INT NOT NULL,
@@ -65,17 +65,17 @@ CREATE TABLE game_genres(
 	FOREIGN KEY(genre_id) REFERENCES genre (genre_id)
 ) ENGINE = InnoDB;
 
---This will create a table displaying how many games each developer
---in the developer table have made
---SELECT d.name, COUNT(vg.game_id) AS 'NumberOfGames' FROM developer d INNER JOIN
---video_game vg ON vg.developer = d.developer_id
---GROUP BY d.name;
+-- This will create a table displaying how many games each developer
+-- in the developer table have made
+-- SELECT d.name, COUNT(vg.game_id) AS 'NumberOfGames' FROM developer d INNER JOIN
+-- video_game vg ON vg.developer = d.developer_id
+-- GROUP BY d.name;
 
---This will create a table displaying the games of each genre
---SELECT g.name, vg.title FROM genre g INNER JOIN
---game_genre gg ON g.genre_id = gg.genre_id INNER JOIN
---video_game vg ON gg.game_id = vg.game_id
---GROUP BY g.name;
+-- This will create a table displaying the games of each genre
+-- SELECT g.name, vg.title FROM genre g INNER JOIN
+-- game_genre gg ON g.genre_id = gg.genre_id INNER JOIN
+-- video_game vg ON gg.game_id = vg.game_id
+-- GROUP BY g.name;
 
 -- people
 CREATE TABLE people (
