@@ -113,7 +113,7 @@ COMMIT;
 
 -- Insert data into video_game
 SET AUTOCOMMIT=0;
-INSERT INTO video_game VALUES (title, releaseMonth, releaseDay, releaseYear, game_series, developer)
+INSERT INTO video_game VALUES
 ('The Elder Scrolls V: Skyrim', 11, 11, 2011, (SELECT series_id FROM game_series WHERE name = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
 ('The Elder Scrolls IV: Oblivion', 3, 20, 2006, (SELECT series_id FROM game_series WHERE name = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
 ('Fallout 4', 11, 10, 2015, (SELECT series_id FROM game_series WHERE name = 'Fallout'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
