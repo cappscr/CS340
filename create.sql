@@ -1,3 +1,35 @@
+--Creates a table named developer with the following properties
+--id - an auto incrementing integer which is the primary key
+--name - name of the developer, cannot be null
+--city - city that the developer is located in
+CREATE TABLE developer(
+	developer_id INT NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	city varchar(255),
+	PRIMARY KEY(developer_id),
+	UNIQUE (name)
+) ENGINE = InnoDB;
+
+--Creates a table named genre with the following properties
+--id - an auto incrementing integer which is the primary key
+--name - name of the genre, cannot be null
+CREATE TABLE genre(
+	genre_id INT NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	PRIMARY KEY(genre_id),
+	UNIQUE(name)
+) ENGINE = InnoDB;
+
+--Creates a table named game_series with the following properties
+--id - an auto incrementing integer which is the primary key
+--title - tile of the series, cannot be null
+CREATE TABLE game_series(
+	series_id INT NOT NULL AUTO_INCREMENT,
+	title varchar(255) NOT NULL,
+	PRIMARY KEY(series_id),
+	UNIQUE(title)
+) ENGINE = InnoDB;
+
 --Creates a table named video_game with the following properties
 --id - an auto incrementing integer which is the primary key
 --title - name of the videogame, cannot be null
@@ -8,8 +40,8 @@
 --developer - id of the developer of the game
 --title, releaseMonth, releaseDay, releaseYear combo must be unique
 --incase same name is used twice (e.g. Doom)
-CREATE TABLE video_game (
-	game_id int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE video_game(
+	game_id INT NOT NULL AUTO_INCREMENT,
 	title varchar(255) NOT NULL,
 	releaseMonth int,
 	releaseDay int,
@@ -22,44 +54,12 @@ CREATE TABLE video_game (
 	UNIQUE KEY(title, releaseMonth, releaseDay, releaseYear)
 ) ENGINE = InnoDB;
 
---Creates a table named developer with the following properties
---id - an auto incrementing integer which is the primary key
---name - name of the developer, cannot be null
---city - city that the developer is located in
-CREATE TABLE developer (
-	developer_id int(11) NOT NULL AUTO_INCREMENT,
-	name varchar(255) NOT NULL,
-	city varchar(255),
-	PRIMARY KEY(developer_id),
-	UNIQUE (name)
-) ENGINE = InnoDB;
-
---Creates a table named genre with the following properties
---id - an auto incrementing integer which is the primary key
---name - name of the genre, cannot be null
-CREATE TABLE genre (
-	genre_id int(11) NOT NULL AUTO_INCREMENT,
-	name varchar(255) NOT NULL,
-	PRIMARY KEY(genre_id),
-	UNIQUE(name)
-) ENGINE = InnoDB;
-
---Creates a table named game_series with the following properties
---id - an auto incrementing integer which is the primary key
---title - tile of the series, cannot be null
-CREATE TABLE game_series (
-	series_id int(11) NOT NULL AUTO_INCREMENT,
-	title varchar(255) NOT NULL,
-	PRIMARY KEY(series_id),
-	UNIQUE(title)
-) ENGINE = InnoDB;
-
 --Creates a table named game_genres with the following properties
 --game_id - id of game being referenced
 --genre_id - id of genre being referenced
-CREATE TABLE game_genres (
-	game_id int(11) NOT NULL,
-	genre_id int(11) NOT NULL,
+CREATE TABLE game_genres(
+	game_id INT NOT NULL,
+	genre_id INT NOT NULL,
 	PRIMARY KEY(game_id, genre_id),
 	FOREIGN KEY(game_id) REFERENCES video_game (game_id),
 	FOREIGN KEY(genre_id) REFERENCES genre (genre_id)
