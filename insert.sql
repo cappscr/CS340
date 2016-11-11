@@ -113,13 +113,13 @@ COMMIT;
 
 -- Insert data into video_game
 SET AUTOCOMMIT=0;
-INSERT INTO video_game VALUES
+INSERT INTO video_game (title, releaseMonth, releaseDay, releaseYear, gameSeries, developer) VALUES
 ('The Elder Scrolls V: Skyrim', 11, 11, 2011, (SELECT series_id FROM game_series WHERE title = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
 ('The Elder Scrolls IV: Oblivion', 3, 20, 2006, (SELECT series_id FROM game_series WHERE title = 'The Elder Scrolls'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
 ('Fallout 4', 11, 10, 2015, (SELECT series_id FROM game_series WHERE title = 'Fallout'), (SELECT developer_id FROM developer WHERE name = 'Bethesda Game Studio')),
 ('Pokemon Go', 7, 6, 2016, (SELECT series_id FROM game_series WHERE title = 'Pokemon'), (SELECT developer_id FROM developer WHERE name = 'Niantic Labs')),
 ('No Man Sky', 8, 9, 2016, NULL, (SELECT developer_id FROM developer WHERE name = 'Hello Games')),
-('Pokemon Snap' 3, 21, 1999, (SELECT series_id FROM game_series WHERE title = 'Pokemon'), (SELECT developer_id FROM developer WHERE name = 'HAL Laboratory, Inc.')),
+('Pokemon Snap', 3, 21, 1999, (SELECT series_id FROM game_series WHERE title = 'Pokemon'), (SELECT developer_id FROM developer WHERE name = 'HAL Laboratory, Inc.')),
 ('Diablo II', 6, 29, 2000, (SELECT series_id FROM game_series WHERE title = 'Diablo'), (SELECT developer_id FROM developer WHERE name = 'Blizzard'));
 COMMIT;
 
@@ -127,11 +127,11 @@ COMMIT;
 -- Insert data into game_genres
 SET AUTOCOMMIT=0;
 INSERT INTO game_genres VALUES
-((SELECT game_id FROM video_game WHERE name = 'The Elder Scrolls V: Skyrim'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game')),
-((SELECT game_id FROM video_game WHERE name = 'The Elder Scrolls IV: Oblivion'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game')),
-((SELECT game_id FROM video_game WHERE name = 'Fallout 4'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game')),
-((SELECT game_id FROM video_game WHERE name = 'Pokemon Go'), (SELECT genre_id FROM genre WHERE name = 'Simulation')),
-((SELECT game_id FROM video_game WHERE name = 'No Man Sky'), (SELECT genre_id FROM genre WHERE name = 'Action-Adventure')),
-((SELECT game_id FROM video_game WHERE name = 'Pokemon Snap'), (SELECT genre_id FROM genre WHERE name = 'Simulation')),
-((SELECT game_id FROM video_game WHERE name = 'Diablo II'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game'));
+((SELECT game_id FROM video_game WHERE title = 'The Elder Scrolls V: Skyrim'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game')),
+((SELECT game_id FROM video_game WHERE title = 'The Elder Scrolls IV: Oblivion'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game')),
+((SELECT game_id FROM video_game WHERE title = 'Fallout 4'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game')),
+((SELECT game_id FROM video_game WHERE title = 'Pokemon Go'), (SELECT genre_id FROM genre WHERE name = 'Simulation')),
+((SELECT game_id FROM video_game WHERE title = 'No Man Sky'), (SELECT genre_id FROM genre WHERE name = 'Action-Adventure')),
+((SELECT game_id FROM video_game WHERE title = 'Pokemon Snap'), (SELECT genre_id FROM genre WHERE name = 'Simulation')),
+((SELECT game_id FROM video_game WHERE title = 'Diablo II'), (SELECT genre_id FROM genre WHERE name = 'Role-Playing Game'));
 COMMIT;
