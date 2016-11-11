@@ -1,3 +1,17 @@
+DROP TABLE IF EXISTS video_game;
+DROP TABLE IF EXISTS developer;
+DROP TABLE IF EXISTS genre;
+DROP TABLE IF EXISTS game_series;
+DROP TABLE IF EXISTS game_genres;
+DROP TABLE IF EXISTS people;
+DROP TABLE IF EXISTS job;
+DROP TABLE IF EXISTS platform;
+DROP TABLE IF EXISTS game_character;
+DROP TABLE IF EXISTS game_platforms;
+DROP TABLE IF EXISTS game_char;
+DROP TABLE IF EXISTS people_jobs;
+
+
 -- Creates a table named developer with the following properties
 -- id: an auto incrementing integer which is the primary key
 -- name: name of the developer, cannot be null
@@ -114,12 +128,12 @@ UNIQUE KEY (name, manufacturer)
 ) Engine=InnoDB;
 
 -- character
-CREATE TABLE character (
+CREATE TABLE game_character (
 char_id INT NOT NULL AUTO_INCREMENT,
 name VARCHAR(255) NOT NULL,
 PRIMARY KEY (char_id),
 UNIQUE KEY (name)
-) Engine =InnoDB
+) Engine =InnoDB;
 
 -- games_platforms
 CREATE TABLE games_platforms (
@@ -136,7 +150,7 @@ game_id INT,
 char_id INT,
 PRIMARY KEY (game_id, char_id),
 CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id),
-CONSTRAINT FOREIGN KEY (char_id) REFERENCES character (char_id)
+CONSTRAINT FOREIGN KEY (char_id) REFERENCES game_character (char_id)
 ) Engine=InnoDB;
 
 -- people_jobs
