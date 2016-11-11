@@ -8,14 +8,14 @@
 --developer - id of the developer of the game
 --title, releaseMonth, releaseDay, releaseYear combo must be unique
 --incase same name is used twice (e.g. Doom)
-CREATE TABLE `video_game`{
-	`game_id` int(11) NOT NULL AUTO_INCREMENT,
-	`title` varchar(255) NOT NULL,
-	`releaseMonth` int,
-	`releaseDay` int,
-	`releaseYear` int,
-	`gameSeries` int,
-	`developer` int,
+CREATE TABLE video_game{
+	game_id int(11) NOT NULL AUTO_INCREMENT,
+	title varchar(255) NOT NULL,
+	releaseMonth int,
+	releaseDay int,
+	releaseYear int,
+	gameSeries int,
+	developer int,
 	PRIMARY KEY(game_id),
 	FOREIGN KEY(gameSeries) REFERENCES game_series (series_id),
 	FOREIGN KEY(developer) REFERENCES developer (developer_id),
@@ -26,10 +26,10 @@ CREATE TABLE `video_game`{
 --id - an auto incrementing integer which is the primary key
 --name - name of the developer, cannot be null
 --city - city that the developer is located in
-CREATE TABLE `developer`{
-	`developer_id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL,
-	`city` varchar(255),
+CREATE TABLE developer{
+	developer_id int(11) NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	city varchar(255),
 	PRIMARY KEY(developer_id),
 	UNIQUE (name)
 } ENGINE = InnoDB;
@@ -37,9 +37,9 @@ CREATE TABLE `developer`{
 --Creates a table named genre with the following properties
 --id - an auto incrementing integer which is the primary key
 --name - name of the genre, cannot be null
-CREATE TABLE `genre`{
-	`genre_id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL,
+CREATE TABLE genre{
+	genre_id int(11) NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
 	PRIMARY KEY(genre_id),
 	UNIQUE(name)
 } ENGINE = InnoDB;
@@ -47,9 +47,9 @@ CREATE TABLE `genre`{
 --Creates a table named game_series with the following properties
 --id - an auto incrementing integer which is the primary key
 --title - tile of the series, cannot be null
-CREATE TABLE `game_series`{
-	`series_id` int(11) NOT NULL AUTO_INCREMENT,
-	`title` varchar(255) NOT NULL,
+CREATE TABLE game_series{
+	series_id int(11) NOT NULL AUTO_INCREMENT,
+	title varchar(255) NOT NULL,
 	PRIMARY KEY(series_id),
 	UNIQUE(title)
 } ENGINE = InnoDB;
@@ -58,8 +58,8 @@ CREATE TABLE `game_series`{
 --game_id - id of game being referenced
 --genre_id - id of genre being referenced
 CREATE TABLE `game_genres{
-	`game_id` int(11) NOT NULL,
-	`genre_id` int(11) NOT NULL,
+	game_id int(11) NOT NULL,
+	genre_id int(11) NOT NULL,
 	PRIMARY KEY(game_id, genre_id),
 	FOREIGN KEY(game_id) REFERENCES video_game (game_id),
 	FOREIGN KEY(genre_id) REFERENCES genre (genre_id)
