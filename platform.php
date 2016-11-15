@@ -47,5 +47,43 @@
 				<br />
 			</fieldset>
 		</form>
+
+
+		<table>
+			<thead>
+				<tr>
+					<td><strong>Name</strong>
+					<td><strong>Manufacturer</strong>
+					<td><strong>Cost</strong>
+					<td><strong>Release Date</strong>
+					<td><strong>Graphics Card</strong>
+					<td><strong>Hard Drive</strong>
+					<td><strong>RAM</strong>
+				</tr>
+			</thead>
+<?php
+	$query = "SELECT platform_id, name, manufacturer, cost, releaseMonth, releaseDay, releaseYear, graphics, hardDrive, RAM FROM platform";
+
+	if(!($stmt = $mysqli->prepare($query))){
+		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
+	}
+
+	if(!$stmt->execute()){
+		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
+	}
+
+	if(!$stmt->bind_result($id, $name, $manufacturer, $month, $day, $year, $graphics, $hardDrive, $RAM)){
+		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+	}
+
+	while($stmt->fetch()){
+		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n" . $manufacturer . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n" . $graphics . "\n</td>\n<td>\n" . $hardDrive . "\n</td>\n<td>\n" . $RAM . "\n</td>\n<td>\n<button value='" . $id . "'>Edit</button><button value='" . $id . "'>Delete</button></td>"; 
+	}
+
+	$stmt->close();
+?>
+
+		</table>
+
 	</body>
 </html>
