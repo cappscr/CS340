@@ -72,12 +72,12 @@
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
-	if(!$stmt->bind_result($id, $name, $manufacturer, $month, $day, $year, $graphics, $hardDrive, $RAM)){
+	if(!$stmt->bind_result($id, $name, $manufacturer, $cost, $month, $day, $year, $graphics, $hardDrive, $RAM)){
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
 	while($stmt->fetch()){
-		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n" . $manufacturer . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n" . $graphics . "\n</td>\n<td>\n" . $hardDrive . "\n</td>\n<td>\n" . $RAM . "\n</td>\n<td>\n<button value='" . $id . "'>Edit</button><button value='" . $id . "'>Delete</button></td>"; 
+		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n" . $manufacturer . "\n</td>\n<td>\n" . $cost . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n" . $graphics . "\n</td>\n<td>\n" . $hardDrive . "\n</td>\n<td>\n" . $RAM . "\n</td>\n<td>\n<form action='/update-platform' method='post'>\n <input type='submit' value='Edit'>\n <input type='hidden' name='id' value='" . $id . "'>\n<input type='hidden' name='name' value='" . $name . "'>\n<input type='hidden' name='manufacturer' value='" . $manufacturer . "'>\n<input type='hidden' name='cost' value='" . $cost . "'>\n<input type='hidden' name='month' value='" . $month . "'>\n<input type='hidden' name='day' value = '" . $day . "'>\n<input type='hidden' name='year' value='" . $year . "'>\n<input type='hidden' name='graphics' value='" . $graphics . "'>\n<input type='hidden' name='hardDrive' value='" . $hardDrive . "'>\n<input type='hidden' name='RAM' value='" . $RAM . "'>\n</form>\n<form>\n<button id='" . $id . "'>Remove</button>\n</form>\n</td>\n</tr>";
 	}
 
 	$stmt->close();

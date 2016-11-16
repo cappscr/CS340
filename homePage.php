@@ -55,7 +55,7 @@ if($mysqli->connect_errno){
 
 <?php
 
-$query = "SELECT vg.title, d.name, vg.releaseMonth, vg.releaseDay, vg.releaseYear, gs.title FROM video_game vg INNER JOIN developer d ON d.developer_id = vg.developer INNER JOIN game_series gs ON gs.series_id = vg.gameSeries WHERE vg.releaseYear >= 2015";
+$query = "SELECT vg.title, d.name, vg.releaseMonth, vg.releaseDay, vg.releaseYear, gs.title FROM video_game vg LEFT JOIN developer d ON d.developer_id = vg.developer LEFT JOIN game_series gs ON gs.series_id = vg.gameSeries ORDER BY vg.releaseYear DESC, vg.releaseMonth DESC, vg.releaseDay DESC LIMIT 5";
 
 	if(!($stmt = $mysqli->prepare($query))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
