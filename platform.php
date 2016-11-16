@@ -15,7 +15,7 @@
 	<body>
 		<h1>Platforms</h1>
 
-		<form action="addPlatform.php"> 
+		<form action="add-platform.php" method="post"> 
 			<fieldset>
 				<legend>Add a Platform</legend>
 				<label for="name">Name:</label>
@@ -45,6 +45,7 @@
 				<label for="RAM">RAM:</label>
 				<input name="RAM" id="RAM" value="8 GB">
 				<br />
+				<input type="submit" name="Add">
 			</fieldset>
 		</form>
 
@@ -77,7 +78,7 @@
 	}
 
 	while($stmt->fetch()){
-		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n" . $manufacturer . "\n</td>\n<td>\n" . $cost . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n" . $graphics . "\n</td>\n<td>\n" . $hardDrive . "\n</td>\n<td>\n" . $RAM . "\n</td>\n<td>\n<form action='/update-platform' method='post'>\n <input type='submit' value='Edit'>\n <input type='hidden' name='id' value='" . $id . "'>\n<input type='hidden' name='name' value='" . $name . "'>\n<input type='hidden' name='manufacturer' value='" . $manufacturer . "'>\n<input type='hidden' name='cost' value='" . $cost . "'>\n<input type='hidden' name='month' value='" . $month . "'>\n<input type='hidden' name='day' value = '" . $day . "'>\n<input type='hidden' name='year' value='" . $year . "'>\n<input type='hidden' name='graphics' value='" . $graphics . "'>\n<input type='hidden' name='hardDrive' value='" . $hardDrive . "'>\n<input type='hidden' name='RAM' value='" . $RAM . "'>\n</form>\n<form>\n<button id='" . $id . "'>Remove</button>\n</form>\n</td>\n</tr>";
+		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n" . $manufacturer . "\n</td>\n<td>\n" . $cost . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n" . $graphics . "\n</td>\n<td>\n" . $hardDrive . "\n</td>\n<td>\n" . $RAM . "\n</td>\n<td>\n<form action='/edit-platform' method='post'>\n <input type='submit' value='Edit'>\n <input type='hidden' name='id' value='" . $id . "'>\n<input type='hidden' name='name' value='" . $name . "'>\n<input type='hidden' name='manufacturer' value='" . $manufacturer . "'>\n<input type='hidden' name='cost' value='" . $cost . "'>\n<input type='hidden' name='month' value='" . $month . "'>\n<input type='hidden' name='day' value = '" . $day . "'>\n<input type='hidden' name='year' value='" . $year . "'>\n<input type='hidden' name='graphics' value='" . $graphics . "'>\n<input type='hidden' name='hardDrive' value='" . $hardDrive . "'>\n<input type='hidden' name='RAM' value='" . $RAM . "'>\n</form>\n<form>\n<button id='" . $id . "'>Remove</button>\n</form>\n</td>\n</tr>";
 	}
 
 	$stmt->close();
