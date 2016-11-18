@@ -1,9 +1,9 @@
-<!-- **********************************************
-**** filename: add-platform.php
+<!-- **************************************
+**** filename: update-platform.php
 **** created: November 16, 2016
 **** author: Christopher Capps
 **** class: Oregon State University CS 340
-*************************************************-->
+****************************************-->
 
 <?php
 	// Turn on error reporting
@@ -35,18 +35,18 @@
 	<body>
 
 <?php
-	if (!($stmt = $mysqli->prepare("INSERT INTO platform (name, manufacturer, cost, releaseMonth, releaseDay, releaseYear, graphics, hardDrive, RAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"))){
+	if (!($stmt = $mysqli->prepare("UPDATE platform SET name = ?, manufacturer = ?, cost = ?, releaseMonth = ?, releaseDay = ?, releaseYear = ?, graphics = ?, hardDrive = ?, RAM = ? WHERE platform_id = ?"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
-	if(!($stmt->bind_param("ssdiiisss", $_POST['name'], $_POST['manufacturer'], $_POST['cost'], $_POST['releaseMonth'], $_POST['releaseDay'], $_POST['releaseYear'], $_POST['graphics'], $_POST['hardDrive'], $_POST['RAM']))){
+	if(!($stmt->bind_param("ssdiiisssi", $_POST['name'], $_POST['manufacturer'], $_POST['cost'], $_POST['releaseMonth'], $_POST['releaseDay'], $_POST['releaseYear'], $_POST['graphics'], $_POST['hardDrive'], $_POST['RAM'], $_POST['id']))){
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
 	if(!$stmt->execute()){
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 	} else {
-		echo "Added " . $stmt->affected_rows . " rows to platform.";
+		echo "Updated " . $stmt->affected_rows . " rows to platform.";
 	}
 
 	$stmt->close();

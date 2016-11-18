@@ -1,11 +1,13 @@
-<!-- 
+<!-- **************************************
 File Name:  character.php
 Created By: Christopher Capps
 Date:       November 15, 2016
-Class:      Oregon State University CS 340  -->
+Class:      Oregon State University CS 340  
+***************************************** -->
 
 <?php
 	ini_set('display_errors', 'On');
+
 	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
 
 	if($mysqli->connect_errno){
@@ -21,11 +23,13 @@ Class:      Oregon State University CS 340  -->
 	<body>
 		<h1>Characters</h1>
 
-		<form action="addCharacter.php"> 
+		<form action="add-character.php" method="post"> 
 			<fieldset>
 				<legend>Add a Character</legend>
 				<label for="name">Name:</label>
-				<input name="name" id="name" value="Name" required>
+				<input name="name" value="Name" required>
+				<br />
+				<input type="submit" value="Add">
 				<br />
 			</fieldset>
 		</form>
@@ -53,7 +57,7 @@ Class:      Oregon State University CS 340  -->
 	}
 
 	while($stmt->fetch()){
-		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n<button value='" . $id . "'>Edit</button><button value='" . $id . "'>Delete</button></td>"; 
+		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n<form action='/~cappsc/edit-character.php' method='post'>\n<input type='hidden' name='id' value='" . $id . "'>\n<input type='hidden' name='name' value='" . $name . "'>\n<input type='submit' value='Edit'>\n</form>\n<form action='/~cappsc/delete-character.php' method='post'>\n<input type='hidden' name='id' value='" . $id . "'>\n<input type='submit' value='Delete'>\n</form>\n</td>\n</tr>\n"; 
 	}
 
 	$stmt->close();

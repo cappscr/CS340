@@ -1,5 +1,5 @@
 <!-- ******************************************
-File Name:  character.php
+File Name:  people.php
 Created By: Christopher Capps
 Date:       November 15, 2016
 Class:      Oregon State University CS 340  
@@ -22,24 +22,25 @@ Class:      Oregon State University CS 340
 	<body>
 		<h1>People</h1>
 
-		<form action="addPerson.php"> 
+		<form action="add-person.php" method="post"> 
 			<fieldset>
 				<legend>Add a Person</legend>
 				<label for="fname">First Name:</label>
-				<input name="fname" id="fname" value="John" required>
+				<input name="fname" value="John" required>
 				<br />
 				<label for="lname">Last Name:</label>
-				<input name="lname" id="lname" value="Doe" required>
+				<input name="lname" value="Doe" required>
 				<br />
 				<label for="month">Month:</label>
-				<input type="number" name="releaseMonth" id="releaseMonth" value="1">
+				<input type="number" name="month" value="1">
 				<br />
 				<label for="day">Day:</label>
-				<input type="number" name="releaseDay" id="releaseDay" value="1">
+				<input type="number" name="day" value="1">
 				<br />
 				<label for="year">Year:</label>
-				<input type="number" name="releaseYear" id="releaseYear" value="2016">
+				<input type="number" name="year" value="2016">
 				<br />
+				<input type="submit" value="Add">
 			</fieldset>
 		</form>
 
@@ -68,7 +69,7 @@ Class:      Oregon State University CS 340
 	}
 
 	while($stmt->fetch()){
-		echo "<tr>\n<td>\n" . $fname . "\n</td>\n<td>\n" . $lname . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n<button value='" . $id . "'>Edit</button><button value='" . $id . "'>Delete</button></td>"; 
+		echo "<tr>\n<td>\n" . $fname . "\n</td>\n<td>\n" . $lname . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n <td>\n <form action='/~cappsc/edit-person' method='post'>\n <input type='hidden' name='id' value='" . $id . "'>\n<input type='hidden' name='fname' value='" . $fname . "'>\n<input type='hidden' name='lname' value='" . $lname . "'>\n<input type='hidden' name='month' value='" . $month . "'>\n<input type='hidden' name='day' value='" . $day . "'>\n<input type='hidden' name='year' value='" . $year . "'>\n<input type='submit' value='Edit'>\n</form></td>\n<td>\n<form action='/~cappsc/delete-person' method='post'>\n<input type='hidden' name='id' value='" . $id . "'>\n<input type='submit' value='Delete'></form>\n</td>\n</tr>\n"; 
 	}
 
 	$stmt->close();

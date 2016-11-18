@@ -1,9 +1,9 @@
 <!-- **********************************************
-**** filename: add-platform.php
-**** created: November 16, 2016
+**** filename: add-character.php
+**** created: November 18, 2016
 **** author: Christopher Capps
 **** class: Oregon State University CS 340
-*************************************************-->
+************************************************* -->
 
 <?php
 	// Turn on error reporting
@@ -35,24 +35,26 @@
 	<body>
 
 <?php
-	if (!($stmt = $mysqli->prepare("INSERT INTO platform (name, manufacturer, cost, releaseMonth, releaseDay, releaseYear, graphics, hardDrive, RAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"))){
+	if (!($stmt = $mysqli->prepare("INSERT INTO game_character (name) VALUES (?)"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
-	if(!($stmt->bind_param("ssdiiisss", $_POST['name'], $_POST['manufacturer'], $_POST['cost'], $_POST['releaseMonth'], $_POST['releaseDay'], $_POST['releaseYear'], $_POST['graphics'], $_POST['hardDrive'], $_POST['RAM']))){
+	if(!($stmt->bind_param("s", $_POST['name']))){
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
 	if(!$stmt->execute()){
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 	} else {
-		echo "Added " . $stmt->affected_rows . " rows to platform.";
+		echo "Added " . $stmt->affected_rows . " rows to character.";
 	}
 
 	$stmt->close();
 ?>
 
-		<a class="button" href="/~cappsc/platform.php">Back to Platforms</a>
+		<br />
+		<br />
+		<a class="button" href="/~cappsc/character.php">Back to Characters</a>
 		<a class="button" href="/~cappsc/homePage.php">Home</a>
 
 	</body>

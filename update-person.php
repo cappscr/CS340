@@ -1,9 +1,9 @@
-<!-- **********************************************
-**** filename: add-platform.php
-**** created: November 16, 2016
+<!-- **************************************
+**** filename: update-person.php
+**** created: November 17, 2016
 **** author: Christopher Capps
 **** class: Oregon State University CS 340
-*************************************************-->
+****************************************-->
 
 <?php
 	// Turn on error reporting
@@ -35,24 +35,26 @@
 	<body>
 
 <?php
-	if (!($stmt = $mysqli->prepare("INSERT INTO platform (name, manufacturer, cost, releaseMonth, releaseDay, releaseYear, graphics, hardDrive, RAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"))){
+	if (!($stmt = $mysqli->prepare("UPDATE people SET firstName = ?, lastName = ?, birthMonth = ?, birthDay = ?, birthYear = ? WHERE person_id = ?"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
-	if(!($stmt->bind_param("ssdiiisss", $_POST['name'], $_POST['manufacturer'], $_POST['cost'], $_POST['releaseMonth'], $_POST['releaseDay'], $_POST['releaseYear'], $_POST['graphics'], $_POST['hardDrive'], $_POST['RAM']))){
+	if(!($stmt->bind_param("ssiiii", $_POST['fname'], $_POST['lname'], $_POST['month'], $_POST['day'], $_POST['year'], $_POST['id']))){
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
 	if(!$stmt->execute()){
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 	} else {
-		echo "Added " . $stmt->affected_rows . " rows to platform.";
+		echo "Updated " . $stmt->affected_rows . " rows to people.";
 	}
 
 	$stmt->close();
 ?>
-
-		<a class="button" href="/~cappsc/platform.php">Back to Platforms</a>
+		
+		<br />
+		<br />
+		<a class="button" href="/~cappsc/people.php">Back to People</a>
 		<a class="button" href="/~cappsc/homePage.php">Home</a>
 
 	</body>
