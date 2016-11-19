@@ -45,16 +45,7 @@ CREATE TABLE game_series(
 	UNIQUE(title)
 ) ENGINE = InnoDB;
 
--- Creates a table named video_game with the following properties
--- id - an auto incrementing integer which is the primary key
--- title - name of the videogame, cannot be null
--- releaseMonth - month of the year the game came out as an integer
--- releaseDay - day of the month the game came out as an integer
--- releaseYear- year the game came out as an integer
--- gameSeries - id of the game series that the game belongs to
--- developer - id of the developer of the game
--- title, releaseMonth, releaseDay, releaseYear combo must be unique
--- incase same name is used twice (e.g. Doom)
+
 CREATE TABLE video_game(
 	game_id INT NOT NULL AUTO_INCREMENT,
 	title varchar(255) NOT NULL,
@@ -64,33 +55,19 @@ CREATE TABLE video_game(
 	gameSeries int,
 	developer int,
 	PRIMARY KEY(game_id),
-	FOREIGN KEY(gameSeries) REFERENCES game_series (series_id),
-	FOREIGN KEY(developer) REFERENCES developer (developer_id),
+	FOREIGN KEY(gameSeries) REFERENCES game_series (series_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(developer) REFERENCES developer (developer_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	UNIQUE KEY(title, releaseMonth, releaseDay, releaseYear)
 ) ENGINE = InnoDB;
 
--- Creates a table named game_genres with the following properties
--- game_id - id of game being referenced
--- genre_id - id of genre being referenced
+
 CREATE TABLE game_genres(
 	game_id INT NOT NULL,
 	genre_id INT NOT NULL,
 	PRIMARY KEY(game_id, genre_id),
-	FOREIGN KEY(game_id) REFERENCES video_game (game_id),
-	FOREIGN KEY(genre_id) REFERENCES genre (genre_id)
+	FOREIGN KEY(game_id) REFERENCES video_game (game_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(genre_id) REFERENCES genre (genre_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE = InnoDB;
-
--- This will create a table displaying how many games each developer
--- in the developer table have made
--- SELECT d.name, COUNT(vg.game_id) AS 'NumberOfGames' FROM developer d INNER JOIN
--- video_game vg ON vg.developer = d.developer_id
--- GROUP BY d.name;
-
--- This will create a table displaying the games of each genre
--- SELECT g.name, vg.title FROM genre g INNER JOIN
--- game_genre gg ON g.genre_id = gg.genre_id INNER JOIN
--- video_game vg ON gg.game_id = vg.game_id
--- GROUP BY g.name;
 
 -- people
 CREATE TABLE people (
@@ -141,8 +118,8 @@ CREATE TABLE games_platforms (
 game_id INT,
 platform_id INT,
 PRIMARY KEY (game_id, platform_id),
-CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id),
-CONSTRAINT FOREIGN KEY (platform_id) REFERENCES platform (platform_id)
+CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT FOREIGN KEY (platform_id) REFERENCES platform (platform_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) Engine=InnoDB;
 
 -- game_char
@@ -150,8 +127,8 @@ CREATE TABLE game_char (
 game_id INT,
 char_id INT,
 PRIMARY KEY (game_id, char_id),
-CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id),
-CONSTRAINT FOREIGN KEY (char_id) REFERENCES game_character (char_id)
+CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT FOREIGN KEY (char_id) REFERENCES game_character (char_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) Engine=InnoDB;
 
 -- people_jobs
@@ -161,8 +138,8 @@ job_id INT,
 game_id INT, 
 develop_id INT,
 PRIMARY KEY (person_id, game_id, job_id),
-CONSTRAINT FOREIGN KEY (person_id) REFERENCES people (person_id),
-CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id),
-CONSTRAINT FOREIGN KEY (job_id) REFERENCES job (job_id),
-CONSTRAINT FOREIGN KEY (develop_id) REFERENCES developer (developer_id)
+CONSTRAINT FOREIGN KEY (person_id) REFERENCES people (person_id) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT FOREIGN KEY (game_id) REFERENCES video_game (game_id) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT FOREIGN KEY (job_id) REFERENCES job (job_id) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT FOREIGN KEY (develop_id) REFERENCES developer (developer_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) Engine=InnoDB;
