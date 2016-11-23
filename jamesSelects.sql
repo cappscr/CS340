@@ -16,12 +16,13 @@ game_genres gg ON g.genre_id = gg.genre_id INNER JOIN
 video_game vg ON gg.game_id = vg.game_id;
 
 -- This will create a table displaying information about each game
-SELECT vg.title, vg.releaseMonth, vg.releaseDay, vg.releaseYear, g.name AS "Genre", d.name AS "Developer", gs.title AS "Series" FROM video_game vg
-INNER JOIN game_genres gg ON gg.game_id = vg.game_id
-INNER JOIN genre g ON g.genre_id = gg.genre_id
-INNER JOIN developer d ON vg.developer = d.developer_id
-INNER JOIN game_series gs ON vg.gameSeries = gs.series_id
-GROUP BY vg.title ASC;
+SELECT vg.title, vg.releaseMonth, vg.releaseDay, vg.releaseYear, g.name AS  "Genre", d.name AS  "Developer", gs.title AS  "Series"
+FROM video_game vg
+LEFT JOIN game_genres gg ON gg.game_id = vg.game_id
+LEFT JOIN genre g ON g.genre_id = gg.genre_id
+LEFT JOIN developer d ON vg.developer = d.developer_id
+LEFT JOIN game_series gs ON vg.gameSeries = gs.series_id
+GROUP BY vg.title ASC ;
 
 -- Display games released after 2001
 SELECT title, releaseYear FROM video_game vg
