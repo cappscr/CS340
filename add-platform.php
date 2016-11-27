@@ -33,6 +33,10 @@
 		}
 	</style>
 	<body>
+	
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
 
 <?php
 	if (!($stmt = $mysqli->prepare("INSERT INTO platform (name, manufacturer, cost, releaseMonth, releaseDay, releaseYear, graphics, hardDrive, RAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"))){

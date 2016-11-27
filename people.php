@@ -40,19 +40,8 @@ Class:      Oregon State University CS 340
 		<!-- Head information here -->
 	</head>
 	<body>
-	
 		<div>
-			<table>
-				<tr>
-				<td><a class="button" href="homePage.php">Home</a></td>
-				<td><a class="button" href="developer.php">Developers</a></td>
-				<td><a class="button" href="gameSeries.php">Game Series</a></td>
-				<td><a class="button" href="genre.php">Genres</a></td>
-				<td><a class="button" href="people.php">People</a></td>
-				<td><a class="button" href="platform.php">Platforms</a></td>
-				<td><a class="button" href="videogame.php">Video Games</a></td>
-				</tr>
-			</table>
+			<?php include 'navBar.php'; ?>
 		</div>
 	
 		<h1>People</h1>

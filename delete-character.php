@@ -33,6 +33,10 @@
 		}
 	</style>
 	<body>
+	
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
 
 <?php
 	if (!($stmt = $mysqli->prepare("DELETE FROM game_character WHERE char_id = ?"))){

@@ -26,17 +26,7 @@ if($mysqli->connect_errno){
 <body>
 
 <div>
-	<table>
-		<tr>
-		<td><a class="button" href="homePage.php">Home</a></td>
-		<td><a class="button" href="developer.php">Developers</a></td>
-		<td><a class="button" href="gameSeries.php">Game Series</a></td>
-		<td><a class="button" href="genre.php">Genres</a></td>
-		<td><a class="button" href="people.php">People</a></td>
-		<td><a class="button" href="platform.php">Platforms</a></td>
-		<td><a class="button" href="videogame.php">Video Games</a></td>
-		</tr>
-	</table>
+	<?php include 'navBar.php'; ?>
 </div>
 
 <div>
@@ -279,7 +269,7 @@ if($mysqli->connect_errno){
 					//This block builds a dropdown menu 
 
 					//Get id and name for each genre
-					if(!($stmt = $mysqli->prepare("SELECT char_id, name FROM platform ORDER BY name ASC"))){
+					if(!($stmt = $mysqli->prepare("SELECT char_id, name FROM game_character ORDER BY name ASC"))){
 						echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 					}
 

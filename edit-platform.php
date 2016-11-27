@@ -26,6 +26,10 @@
 		</style>
 	</head>
 	<body>
+	
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
 
 <?php
 		echo "<form action='update-platform.php' method='post'>";

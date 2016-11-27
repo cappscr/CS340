@@ -27,6 +27,10 @@
 	</head>
 	<body>
 
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
+	
 <?php
 		echo "<form action='update-person.php' method='post'>";
 		echo "\n<fieldset>";

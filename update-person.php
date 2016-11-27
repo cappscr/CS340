@@ -33,6 +33,10 @@
 		}
 	</style>
 	<body>
+	
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
 
 <?php
 	if (!($stmt = $mysqli->prepare("UPDATE people SET firstName = ?, lastName = ?, birthMonth = ?, birthDay = ?, birthYear = ? WHERE person_id = ?"))){

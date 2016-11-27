@@ -29,21 +29,14 @@ if($mysqli->connect_errno){
 	<head>
 
 	</head>
+	
+	<div>
+		<?php include 'navBar.php'; ?>
+	</div>
+	
 	<body>
 		<h1>Greatest Videogame Database Ever</h1>
 		
-		<table>
-			<caption>What would you like to search for?<caption>
-				<tr>
-					<td><a class="button" href="homePage.php">Home</a></td>
-					<td><a class="button" href="developer.php">Developers</a></td>
-					<td><a class="button" href="gameSeries.php">Game Series</a></td>
-					<td><a class="button" href="genre.php">Genres</a></td>
-					<td><a class="button" href="people.php">People</a></td>
-					<td><a class="button" href="platform.php">Platforms</a></td>
-					<td><a class="button" href="videogame.php">Video Games</a></td>
-				</tr>
-		</table>
 		<br />
 		<br />
 		
