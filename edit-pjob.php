@@ -1,7 +1,7 @@
 <!-- ******************************************
-File Name:  people-jobs.php
+File Name:  edit-pjob.php
 Created By: Christopher Capps
-Date:       November 18, 2016
+Date:       November 19, 2016
 Class:      Oregon State University CS 340  
 ******************************************* -->
 
@@ -45,14 +45,21 @@ Class:      Oregon State University CS 340
 		</div>
 		<br />
 
-		<h1>People</h1>
-
-		<form action="add-pjob.php" method="post"> 
+		<form action="update-pjob.php" method="post"> 
 			<fieldset>
-				<legend>Add a Person's Job</legend>
+				<legend>Update a Person's Job</legend>
+<?php
+	// Add hidden inputs to pass the old values for person_id, job_id, and game_id to the 
+	// update page so that the proper row can be selected
+	echo "<input type='hidden' name='oldpid' value='" . $_POST['pid'] . "'>\n";
+	echo "<input type='hidden' name='oldjid' value='" . $_POST['jid'] . "'>\n";
+	echo "<input type='hidden' name='oldvgid' value='" . $_POST['gid'] ."'>\n"; 
+?>
 				<label for="pid">Person:</label>
 				<select name="pid">
 <?php
+	// Prepare SQL statement to select people information in order to dynamically 
+	// populate a drop down menu of all people in the people table
 	if(!($stmt = $mysqli->prepare("SELECT person_id, firstName, lastName FROM people"))){
 		echo "Prepare failed : " . $stmt->errno . " " . $stmt->error;
 	}
@@ -61,12 +68,18 @@ Class:      Oregon State University CS 340
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
+	// Bind results to php variables
 	if(!$stmt->bind_result($pid, $fname, $lname)){
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
+	// Loop through results and assign the selected row the selected attribute on their option tag
 	while($stmt->fetch()){
-		echo "<option value='" . $pid . "'>" . $fname . " " . $lname . "</option>\n";
+		if($pid == $_POST['pid']){
+			echo "<option value='" . $pid . "' selected>" . $fname . " " . $lname . "</option>\n";
+		} else {
+			echo "<option value='" . $pid . "'>" . $fname . " " . $lname . "</option>\n";
+		}
 	}
 
 	$stmt->close();
@@ -76,6 +89,8 @@ Class:      Oregon State University CS 340
 				<label for="jid">Job:</label>
 				<select name="jid">
 <?php
+	// Prepare and execute a SQL statment to select all the possible jobs from job table.
+	// Use the jobs to dynamically populate a dropdown menu
 	if(!($stmt = $mysqli->prepare("SELECT job_id, name FROM job"))){
 		echo "Prepare failed : " . $stmt->errno . " " . $stmt->error;
 	}
@@ -88,8 +103,14 @@ Class:      Oregon State University CS 340
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
+	// Use the value of the 'jid' recieved from the submitted form to assign the selected 
+	// attribute to row that was selected to edit
 	while($stmt->fetch()){
-		echo "<option value='" . $jid . "'>" . $jname . "</option>\n";
+		if($jid == $_POST['jid']){
+			echo "<option value='" . $jid . "' selected>" . $jname . "</option>\n";
+		} else {
+			echo "<option value='" . $jid . "'>" . $jname . "</option>\n";
+		}
 	}
 
 	$stmt->close();
@@ -99,6 +120,8 @@ Class:      Oregon State University CS 340
 				<label for="vgid">Video Game:</label>
 				<select name="vgid">
 <?php
+	// Prepare SQL statement for execution that selects all the video game titles 
+	// from the video_game table to dynamically populate the dropdown menu to select games
 	if(!($stmt = $mysqli->prepare("SELECT game_id, title FROM video_game"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 	}
@@ -111,8 +134,13 @@ Class:      Oregon State University CS 340
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
+	// While still fetching values display the passed value as the selected value
 	while($stmt->fetch()){
-		echo "<option value='" . $vgid . "'>" . $gtitle . "</option>\n";
+		if($vgid == $_POST['gid']){
+			echo "<option value='" . $vgid . "' selected>" . $gtitle . "</option>\n";
+		} else {
+			echo "<option value='" . $vgid . "'>" . $gtitle . "</option>\n";
+		}
 	}
 
 	$stmt->close();
@@ -122,6 +150,8 @@ Class:      Oregon State University CS 340
 				<label for="did">Developer:</label>
 				<select name="did">
 <?php
+	// Prepare a SQL statement for execution that selects all the developers from the 
+	// developer table to dynamically populate the drop down menu to select developer
 	if(!($stmt = $mysqli->prepare("SELECT developer_id, name FROM developer"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 	}
@@ -134,52 +164,21 @@ Class:      Oregon State University CS 340
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
+	// Assign the selected attribute to the value passed via the form submitted to this page
 	while($stmt->fetch()){
-		echo "<option value='" . $did . "'>" . $dname . "</option>\n";
+		if($did == $_POST['did']){
+			echo "<option value='" . $did . "' selected>" . $dname . "</option>\n";
+		} else {
+			echo "<option value='" . $did . "'>" . $dname . "</option>\n";
+		}
 	}
 
 	$stmt->close();
 ?>
 				</select>
 				<br />
-				<input type="submit" value="Add">
+				<input type="submit" value="Update">
 			</fieldset>
 		</form>
-
-
-		<table>
-			<thead>
-				<tr>
-					<td><strong>First Name</strong>
-					<td><strong>Last Name</strong>
-					<td><strong>Job</strong>
-					<td><strong>Video Game</strong>
-					<td><strong>Developer</strong>
-				</tr>
-			</thead>
-<?php
-	$query = "SELECT pj.person_id, pj.job_id, pj.game_id, pj.develop_id, p.firstName, p.lastName, j.name, vg.title, d.name FROM people_jobs pj LEFT JOIN people p ON p.person_id = pj.person_id LEFT JOIN job j ON j.job_id = pj.job_id LEFT JOIN video_game vg ON vg.game_id = pj.game_id LEFT JOIN developer d ON d.developer_id = pj.develop_id";
-
-	if(!($stmt = $mysqli->prepare($query))){
-		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
-	}
-
-	if(!$stmt->execute()){
-		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
-	}
-
-	if(!$stmt->bind_result($pid, $jid, $gid, $did, $fname, $lname, $job, $game, $company)){
-		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
-	}
-
-	while($stmt->fetch()){
-		echo "<tr>\n<td>\n" . $fname . "\n</td>\n<td>\n" . $lname . "\n</td>\n<td>\n" . $job . "</td>\n<td>\n" . $game . "</td>\n<td>\n" . $company . "\n</td>\n <td>\n <form action='/~cappsc/edit-pjob.php' method='post'>\n<input type='hidden' name='pid' value='" . $pid . "'>\n<input type='hidden' name='jid' value='" . $jid . "'>\n<input type='hidden' name='gid' value='" . $gid . "'>\n<input type='hidden' name='did' value='" . $did . "'>\n<input type='submit' value='Edit'>\n</form></td>\n<td>\n<form action='/~cappsc/delete-pjob.php' method='post'>\n<input type='hidden' name='pid' value='" . $pid . "'>\n<input type='hidden' name='jid' value='" . $jid . "'>\n<input type='hidden' name='gid' value='" . $gid . "'>\n<input type='hidden' name='did' value='" . $did . "'>\n<input type='submit' value='Delete'>\n</form>\n</td>\n</tr>\n"; 
-	}
-
-	$stmt->close();
-?>
-
-		</table>
-
 	</body>
 </html>
