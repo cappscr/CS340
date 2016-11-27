@@ -14,6 +14,18 @@ if($mysqli->connect_errno){
 
 <!DOCTYPE html>
 <html>
+
+	<style>
+			a.button {
+				-webkit-appearance: button;
+				-moz-appearance: button;
+				appearance: button;
+
+				text-decoration: none;
+				color: initial;
+			}
+	</style>
+
 	<head>
 
 	</head>
@@ -22,17 +34,15 @@ if($mysqli->connect_errno){
 		
 		<table>
 			<caption>What would you like to search for?<caption>
-			<tr>
-				<td><input type = "submit" value = "Videogame" id = "videogame">
-				<td><input type = "submit" value = "Platform" id = "platform">
-				<td><input type = "submit" value = "Developer" id = "developer">
-				<td><input type = "submit" value = "Artist" id = "artist">
-				<td><input type = "submit" value = "Composer" id = "composer">
-				<td><input type = "submit" value = "Genre" id = "genre">
-				<td><input type = "submit" value = "Series" id = "series">
-				<td><input type = "submit" value = "Character" id = "character">
-				<td><input type = "submit" value = "Lead Programmer" id = "programmer">
-			</tr>
+				<tr>
+					<td><a class="button" href="homePage.php">Home</a></td>
+					<td><a class="button" href="developer.php">Developers</a></td>
+					<td><a class="button" href="gameSeries.php">Game Series</a></td>
+					<td><a class="button" href="genre.php">Genres</a></td>
+					<td><a class="button" href="people.php">People</a></td>
+					<td><a class="button" href="platform.php">Platforms</a></td>
+					<td><a class="button" href="videogame.php">Video Games</a></td>
+				</tr>
 		</table>
 		<br />
 		<br />

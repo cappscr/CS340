@@ -26,6 +26,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 <div>
 	<table>
 		<tr>
+		<td><a class="button" href="homePage.php">Home</a></td>
 		<td><a class="button" href="developer.php">Developers</a></td>
 		<td><a class="button" href="gameSeries.php">Game Series</a></td>
 		<td><a class="button" href="genre.php">Genres</a></td>
@@ -50,10 +51,10 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 		</tr>
 		<?php
 			if(!($stmt = $mysqli->prepare("SELECT vg.game_id, vg.title, vg.releaseMonth, vg.releaseDay, vg.releaseYear, g.name, d.name, gs.title FROM video_game vg
-														INNER JOIN game_genres gg ON gg.game_id = vg.game_id
-														INNER JOIN genre g ON g.genre_id = gg.genre_id
-														INNER JOIN developer d ON vg.developer = d.developer_id
-														INNER JOIN game_series gs ON vg.gameSeries = gs.series_id
+														LEFT JOIN game_genres gg ON gg.game_id = vg.game_id
+														LEFT JOIN genre g ON g.genre_id = gg.genre_id
+														LEFT JOIN developer d ON vg.developer = d.developer_id
+														LEFT JOIN game_series gs ON vg.gameSeries = gs.series_id
 														WHERE d.developer_id = ?
 														ORDER BY vg.title ASC"))){
 				echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;

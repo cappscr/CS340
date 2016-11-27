@@ -26,6 +26,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 <div>
 	<table>
 		<tr>
+		<td><a class="button" href="homePage.php">Home</a></td>
 		<td><a class="button" href="developer.php">Developers</a></td>
 		<td><a class="button" href="gameSeries.php">Game Series</a></td>
 		<td><a class="button" href="genre.php">Genres</a></td>

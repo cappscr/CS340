@@ -38,22 +38,25 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 </div>
 
 <?php
-	if(!($stmt = $mysqli->prepare("DELETE FROM video_game WHERE game_id = ?"))){
+	$gameID = $_POST['gameID'];
+	$platformID = $_POST['platformID'];
+	
+	if(!$mysqli || $mysqli->connect_errno){
+		echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+		}
+		
+	if(!($stmt = $mysqli->prepare("INSERT INTO games_platforms(game_id, platform_id) VALUES (?,?)"))){
 		echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 	}
-
-	//Bound the ? from above to the integer below
-	if(!($stmt->bind_param("i",$_POST['gameID']))){
+	if(!($stmt->bind_param("ii",$gameID, $platformID))){
 		echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 	}
 
 	if(!$stmt->execute()){
-		echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+		echo "Execute failed: "  . $stmt->errno . " " . $stmt->error;
+	} else {
+		echo "Added to game_platform";
 	}
-
-	else
-		echo "You have deleted from the video_game table";
-	$stmt->close();
 ?>
 
 </body>
