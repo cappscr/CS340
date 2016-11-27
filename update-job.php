@@ -1,9 +1,9 @@
-<!-- **********************************************
-**** filename: add-person.php
-**** created: November 17, 2016
+<!-- **************************************
+**** filename: update-job.php
+**** created: November 18, 2016
 **** author: Christopher Capps
 **** class: Oregon State University CS 340
-*************************************************-->
+**************************************** -->
 
 <?php
 	// Turn on error reporting
@@ -27,7 +27,7 @@
 			-webkit-appearance: button;
 			-moz-appearance: button;
 			appearance: button;
-			padding: 5 px;
+
 			text-decoration: none;
 			color: initial;
 		}
@@ -35,27 +35,26 @@
 	<body>
 
 <?php
-	if (!($stmt = $mysqli->prepare("INSERT INTO people (firstName, lastName, birthMonth, birthDay, birthYear) VALUES (?, ?, ?, ?, ?)"))){
+	if (!($stmt = $mysqli->prepare("UPDATE job SET name = ? WHERE job_id = ?"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
-	if(!($stmt->bind_param("ssiii", $_POST['fname'], $_POST['lname'], $_POST['month'], $_POST['day'], $_POST['year']))){
+	if(!($stmt->bind_param("si", $_POST['job_name'], $_POST['id']))){
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
 	if(!$stmt->execute()){
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
-		echo $stmt;
 	} else {
-		echo "Added " . $stmt->affected_rows . " rows to people.";
+		echo "Updated " . $stmt->affected_rows . " rows in job.";
 	}
 
 	$stmt->close();
 ?>
-
+		
 		<br />
 		<br />
-		<a class="button" href="/~cappsc/people.php">Back to People</a>
+		<a class="button" href="/~cappsc/job.php">Back to Jobs</a>
 		<a class="button" href="/~cappsc/homePage.php">Home</a>
 
 	</body>

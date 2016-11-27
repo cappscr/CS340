@@ -1,9 +1,9 @@
-<!-- **********************************************
-**** filename: add-person.php
-**** created: November 17, 2016
+<!-- **************************************
+**** filename: update-pjob.php
+**** created: November 20, 2016
 **** author: Christopher Capps
 **** class: Oregon State University CS 340
-*************************************************-->
+****************************************-->
 
 <?php
 	// Turn on error reporting
@@ -23,11 +23,12 @@
 		<!-- Head information here -->
 	</head>
 	<style>
+		/* Styling for buttons */
 		a.button {
 			-webkit-appearance: button;
 			-moz-appearance: button;
 			appearance: button;
-			padding: 5 px;
+
 			text-decoration: none;
 			color: initial;
 		}
@@ -35,27 +36,28 @@
 	<body>
 
 <?php
-	if (!($stmt = $mysqli->prepare("INSERT INTO people (firstName, lastName, birthMonth, birthDay, birthYear) VALUES (?, ?, ?, ?, ?)"))){
+	// Prepare a SQL statement to update the values for a selected row in the people_jobs table 
+	// the values to select the correct row are passed via a form to this page
+	if (!($stmt = $mysqli->prepare("UPDATE people_jobs SET person_id = ?, job_id = ?, game_id = ?, develop_id = ? WHERE person_id = ? AND job_id = ? AND game_id = ?"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
-	if(!($stmt->bind_param("ssiii", $_POST['fname'], $_POST['lname'], $_POST['month'], $_POST['day'], $_POST['year']))){
+	if(!($stmt->bind_param("iiiiiii", $_POST['pid'], $_POST['jid'], $_POST['vgid'], $_POST['did'], $_POST['oldpid'], $_POST['oldjid'], $_POST['oldvgid']))){
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
 	if(!$stmt->execute()){
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
-		echo $stmt;
 	} else {
-		echo "Added " . $stmt->affected_rows . " rows to people.";
+		echo "Updated " . $stmt->affected_rows . " rows in people_jobs.";
 	}
 
 	$stmt->close();
 ?>
-
+		
 		<br />
 		<br />
-		<a class="button" href="/~cappsc/people.php">Back to People</a>
+		<a class="button" href="/~cappsc/people-jobs.php">Back to People Jobs</a>
 		<a class="button" href="/~cappsc/homePage.php">Home</a>
 
 	</body>

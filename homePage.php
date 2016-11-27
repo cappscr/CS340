@@ -15,11 +15,35 @@ if($mysqli->connect_errno){
 <!DOCTYPE html>
 <html>
 	<head>
-
+		<style>
+			a.button {
+			   -webkit-appearance: button;
+			   -moz-appearance: button;
+			   appearance: button;
+			   text-decoration: none;
+			   color: initial;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Greatest Videogame Database Ever</h1>
 		
+		<!-- Row of navigation buttons -->
+		<div>
+			<table>
+				<tr>
+					<td><a class="button" href="developer.php">Developers</a></td>
+					<td><a class="button" href="gameSeries.php">Game Series</a></td>
+					<td><a class="button" href="genre.php">Genres</a></td>
+					<td><a class="button" href="people.php">People</a></td>
+					<td><a class="button" href="platform.php">Platforms</a></td>
+					<td><a class="button" href="videogame.php">Video Games</a></td>
+					<td><a class="button" href="job.php">Jobs</a></td>
+				</tr>
+			</table>
+		</div>
+		<br />
+<!--
 		<table>
 			<caption>What would you like to search for?<caption>
 			<tr>
@@ -39,7 +63,33 @@ if($mysqli->connect_errno){
 		
 		<form id = "searchForm">
 			<input type="text" name="search" placeholder="Search...">
-		</form>
+		</form> 
+-->
+
+		<h4>
+			Check out these new games!
+		</h4>
+<?php
+	$query = "SELECT p.firstName, p.lastName, vg.title, j.name, d.name FROM people p INNER JOIN people_jobs pj ON pj.person_id = p.person_id INNER JOIN developer d ON d.developer_id = pj.develop_id INNER JOIN job j ON j.job_id = pj.job_id INNER JOIN video_game vg ON vg.game_id = pj.game_id WHERE p.person_id = ?";
+
+	if(!($stmt = $mysqli->prepare($query))){
+		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
+	}
+
+	if(!($stmt->bind_param("i", $_POST['pid']))){
+		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+	}
+
+	if(!$stmt->execute()){
+		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
+	}
+
+	if(!$stmt->bind_result($fname, $lname, $gtitle, $job, $dname)){
+		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
+	}
+
+	$stmt->close();
+?>
 		<br />
 		<br />
 

@@ -18,8 +18,33 @@ Class:      Oregon State University CS 340
 <html>
 	<head>
 		<!-- Head information here -->
+		<style>
+			a.button {
+			   -webkit-appearance: button;
+			   -moz-appearance: button;
+			   appearance: button;
+			   text-decoration: none;
+			   color: initial;
+			}
+		</style>
 	</head>
 	<body>
+
+		<!-- Row of navigational buttons -->
+		<div>
+			<table>
+				<tr>
+					<td><a class="button" href="developer.php">Developers</a></td>
+					<td><a class="button" href="gameSeries.php">Game Series</a></td>
+					<td><a class="button" href="genre.php">Genres</a></td>
+					<td><a class="button" href="people.php">People</a></td>
+					<td><a class="button" href="platform.php">Platforms</a></td>
+					<td><a class="button" href="videogame.php">Video Games</a></td>
+				</tr>
+			</table>
+		</div>
+		<br />
+
 		<h1>People</h1>
 
 		<form action="add-person.php" method="post"> 
