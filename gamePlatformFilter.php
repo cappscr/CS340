@@ -1,9 +1,13 @@
 <?php
-//Turn on error reporting
-ini_set('display_errors', 'On');
-//Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPSP","robinjam-db");
+	// Turn on error reporting
+	ini_set('display_errors', 'On');
 
+	// Connect to database
+	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
+
+	if($mysqli->connect_errno){
+		echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"

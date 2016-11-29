@@ -1,9 +1,13 @@
 <?php
-//Turn on error reporting
-ini_set('display_errors', 'On');
-//Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPSP","robinjam-db");
+	// Turn on error reporting
+	ini_set('display_errors', 'On');
 
+	// Connect to database
+	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
+
+	if($mysqli->connect_errno){
+		echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -29,17 +33,17 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 
 <div>
 	<?php
-		$series_id = $_POST['sID'];
-		echo $series_id;
+		$developer_id = $_POST['developerID'];
+		echo $developer_id;
 	
-		if(!($stmt = $mysqli->prepare("SELECT title FROM game_series
-											WHERE series_id = ?")))
+		if(!($stmt = $mysqli->prepare("SELECT name, city FROM developer
+											WHERE developer_id = ?")))
 			{
 				echo "Prepare failed: " .$stmt->errno . " " . $stmt->error;
 			}
 			
 			//Bound the ? from above to the integer below
-			if(!($stmt->bind_param("i", $series_id))){
+			if(!($stmt->bind_param("i", $developer_id))){
 			echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 			}
 			
@@ -49,7 +53,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 			}
 			
 			//save results if you get some
-			if(!$stmt->bind_result($title))
+			if(!$stmt->bind_result($name, $city))
 			{
 				echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
 			}
@@ -57,16 +61,17 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 		//create a prepopulated form
 		while($stmt -> fetch())
 		{
-			echo 	"<form method='post' action='editSeries.php'> \n
+			echo 	"<form method='post' action='update-developer.php'> \n
 						<fieldset>\n
-							<legend>Edit the series's information</legend> \n
-							<p>Title: <input type = 'text' name = 'title' value = '" . $title . "' /></p>\n
+							<legend>Edit the developer's information</legend> \n
+							<p>Name: <input type = 'text' name = 'name' value = '" . $name . "' /></p>\n
+							<p>City: <input type = 'text' name = 'city' value = " . $city . " /></p>\n
 						</fieldset>\n";
 			 
 		}
 		?>
 		
-		<?php echo "<p><input type = 'hidden' name = 'seriesID' value = " . $series_id . " /></p>"; ?>
+		<?php echo "<p><input type = 'hidden' name = 'developerID' value = " . $_POST['developerID'] . " /></p>"; ?>
 		<p><input type = "submit" value = "Submit"/></p>
 	</form>
 </div>

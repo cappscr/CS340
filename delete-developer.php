@@ -1,9 +1,13 @@
-<?php
-//Turn on error reporting
-ini_set('display_errors', 'On');
-//Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPSP","robinjam-db");
+<<?php
+	// Turn on error reporting
+	ini_set('display_errors', 'On');
 
+	// Connect to database
+	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
+
+	if($mysqli->connect_errno){
+		echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -28,12 +32,12 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 </div>
 
 <?php
-	if(!($stmt = $mysqli->prepare("DELETE FROM video_game WHERE game_id = ?"))){
+	if(!($stmt = $mysqli->prepare("DELETE FROM developer WHERE developer_id = ?"))){
 		echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 	}
 
 	//Bound the ? from above to the integer below
-	if(!($stmt->bind_param("i",$_POST['gameID']))){
+	if(!($stmt->bind_param("i",$_POST['developerID']))){
 		echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 	}
 
@@ -42,7 +46,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 	}
 
 	else
-		echo "You have deleted from the video_game table";
+		echo "You have deleted from the developer table";
 	$stmt->close();
 ?>
 

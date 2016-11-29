@@ -1,10 +1,12 @@
 <?php
-//Turn on error reporting
-ini_set('display_errors', 'On');
-//Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPSP","robinjam-db");
-if($mysqli->connect_errno){
-	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	// Turn on error reporting
+	ini_set('display_errors', 'On');
+
+	// Connect to database
+	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
+
+	if($mysqli->connect_errno){
+		echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 	}
 ?>
 
@@ -77,11 +79,11 @@ if($mysqli->connect_errno){
 		<input type = "hidden" name = "developer" value = ' . $id . ' />
 		</form> 
 		</td><td>' . "\n" . '
-		<form method="post" action="editDeveloperForm.php">' . "\n" . '
+		<form method="post" action="edit-developer.php">' . "\n" . '
 		<input type="submit" value="Edit" />' . "\n" . '
 		<input type = "hidden" name = "developerID" value = ' . $id . ' />' . "\n" . '
 		</form></td><td>' . "\n" . '
-		<form method="post" action="deleteDeveloper.php">' . "\n" . '
+		<form method="post" action="delete-developer.php">' . "\n" . '
 		<input type="submit" value="Delete" />' . "\n" . '
 		<input type = "hidden" name = "developerID" value = ' . $id . ' />' . "\n" . '
 		</form></td>' . "\n";
@@ -94,7 +96,7 @@ if($mysqli->connect_errno){
 </div>
 
 <div>
-	<form method = "post" action = "addDeveloper.php">
+	<form method = "post" action = "add-developer.php">
 		<fieldset>
 			<legend>Enter information for the new developer</legend>
 			<p>Name: <input type = "text" name = "name"/></p>

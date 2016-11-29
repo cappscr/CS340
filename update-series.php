@@ -1,10 +1,12 @@
 <?php
-//Turn on error reporting
-ini_set('display_errors', 'On');
-//Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPSP","robinjam-db");
-if($mysqli->connect_errno){
-	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	// Turn on error reporting
+	ini_set('display_errors', 'On');
+
+	// Connect to database
+	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
+
+	if($mysqli->connect_errno){
+		echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 	}
 ?>
 
@@ -31,19 +33,21 @@ if($mysqli->connect_errno){
 
 <?php
 	if(!$mysqli || $mysqli->connect_errno){
-		echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
-		}
-		
-	if(!($stmt = $mysqli->prepare("INSERT INTO game_series(title) VALUES (?)"))){
+	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	}
+	
+	if(!($stmt = $mysqli->prepare("UPDATE game_series SET title = '" . $_POST['title'] . "' 
+									WHERE series_id = ?"))){
 		echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 	}
-	if(!($stmt->bind_param("s",$_POST['title']))){
+	if(!($stmt->bind_param("i", $_POST['seriesID']))){
 		echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 	}
+
 	if(!$stmt->execute()){
 		echo "Execute failed: "  . $stmt->errno . " " . $stmt->error;
 	} else {
-		echo "Added " . $stmt->affected_rows . " rows to game_series.";
+		echo "Editted " . $_POST['title'] . " in game_series";
 	}
 ?>
 

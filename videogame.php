@@ -1,10 +1,12 @@
 <?php
-//Turn on error reporting
-ini_set('display_errors', 'On');
-//Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPSP","robinjam-db");
-if($mysqli->connect_errno){
-	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	// Turn on error reporting
+	ini_set('display_errors', 'On');
+
+	// Connect to database
+	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
+
+	if($mysqli->connect_errno){
+		echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 	}
 ?>
 
@@ -72,11 +74,11 @@ if($mysqli->connect_errno){
 				echo "<tr>\n<td>\n" . $title . "\n</td>\n<td>\n" . $rMonth . "-" . $rDay . "-" .  $rYear . "\n</td>\n<td>\n" 
 					. $genre . "\n</td>\n<td>\n" . $gSeries . "\n</td>\n<td>\n" . $developer 
 					. '</td><td>
-						<form method="post" action="editGameForm.php">' . "\n" .
+						<form method="post" action="edit-game.php">' . "\n" .
 						'<input type="submit" value="Edit" />' . "\n" .
 						'<input type = "hidden" name = "gameID" value = ' . $id . ' />' . "\n" .
 						'</form></td>' . "\n" .
-					'<td><form method="post" action="deleteGame.php">' . "\n" .
+					'<td><form method="post" action="delete-game.php">' . "\n" .
 						'<input type="submit" value="Delete" />' . "\n" .
 						'<input type = "hidden" name = "gameID" value = ' . $id . ' />' . "\n" .
 						'</form></td>' . "\n";
@@ -89,7 +91,7 @@ if($mysqli->connect_errno){
 </div>
 
 <div>
-	<form method = "post" action = "addGame.php">
+	<form method = "post" action = "add-game.php">
 		<fieldset>
 			<legend>Enter information for the new game</legend>
 			<p>Title: <input type = "text" name = "title" /></p>
