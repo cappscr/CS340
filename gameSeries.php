@@ -30,44 +30,12 @@ if($mysqli->connect_errno){
 			  color: blue;
 			  cursor: pointer;
 		}
-		
-		.linkDescription {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			background: rgba(29, 106, 154, 0.72);
-			color: #fff;
-
-
-			visibility: hidden;
-			opacity: 0;
-		}
-		
-		.submitLink:hover .linkDescription {
-			visibility: visibility;
-			opacity: 1;
-		}
-
-		submitLink:focus {
-			outline: none;
-		}
 </style>
 
 <body>
 
 <div>
-	<table>
-		<tr>
-		<td><a class="button" href="developer.php">Developers</a></td>
-		<td><a class="button" href="gameSeries.php">Game Series</a></td>
-		<td><a class="button" href="genre.php">Genres</a></td>
-		<td><a class="button" href="people.php">People</a></td>
-		<td><a class="button" href="platform.php">Platforms</a></td>
-		<td><a class="button" href="videogame.php">Video Games</a></td>
-		</tr>
-	</table>
+	<?php include 'navBar.php'; ?>
 </div>
 
 <div>
@@ -75,10 +43,17 @@ if($mysqli->connect_errno){
 		<tr>
 			<td>Game Series</td>
 		</tr>
+		
+		<tr>
+			<td>Title</td>
+			<td>Number of Games</td>
+		</tr>
 
 		<?php
 			//Get data from vide_game table
-			if(!($stmt = $mysqli->prepare("SELECT series_id, title FROM game_series")))
+			if(!($stmt = $mysqli->prepare('SELECT gs.series_id, gs.title, COUNT(vg.title) AS "Number of Games in Series" FROM game_series gs
+											LEFT JOIN video_game vg ON gs.series_id = vg.gameSeries
+											GROUP BY gs.title')))
 			{
 				echo "Prepare failed: " .$stmt->errno . " " . $stmt->error;
 			}
@@ -89,7 +64,7 @@ if($mysqli->connect_errno){
 			}
 			
 			//save results if you get some
-			if(!$stmt->bind_result($id, $title))
+			if(!$stmt->bind_result($id, $title, $gameCount))
 			{
 				echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
 			}
@@ -97,12 +72,11 @@ if($mysqli->connect_errno){
 			//display results until you run out of stuff to display
 			while($stmt->fetch())
 			{
-				echo '<tr><td> 
-				<form method = "post" action = "gameSeriesFilter.php" >
-				<input type = "submit" class = "submitLink" value = "' . $title . '" />
+				echo "<tr>\n<td>\n" . $title . "</td>\n<td>\n" . 
+				'<form method = "post" action = "gameSeriesFilter.php" >
+				<input type = "submit" class = "submitLink" value = "' . $gameCount . '" />
 				<input type = "hidden" name = "gameSeries" value = ' . $id . ' />
 				</form>
-				<p class = "linkDescription" style ="display: none">Click to see what games are in this series</p>
 				</td><td>
 				<form method="post" action="editSeriesForm.php">' . "\n" . '
 				<input type="submit" value="Edit" />' . "\n" . '
@@ -110,7 +84,7 @@ if($mysqli->connect_errno){
 				</form></td>' . "\n" . '
 				<td><form method="post" action="deleteSeries.php">' . "\n" . '
 				<input type="submit" value="Delete" />' . "\n" . '
-				<input type = "hidden" name = "sID" value = ' . $id . ' /> </form>' . "\n";
+				<input type = "hidden" name = "sID" value = ' . $id . ' /> </form></td>' . "\n";
 			}
 			
 			$stmt->close();

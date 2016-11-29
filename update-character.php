@@ -33,6 +33,10 @@
 		}
 	</style>
 	<body>
+	
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
 
 <?php
 	if (!($stmt = $mysqli->prepare("UPDATE game_character SET name = ? WHERE char_id = ?"))){

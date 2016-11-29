@@ -34,6 +34,10 @@
 	</style>
 	<body>
 
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
+	
 <?php
 	if (!($stmt = $mysqli->prepare("DELETE FROM platform WHERE platform_id = ?"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;

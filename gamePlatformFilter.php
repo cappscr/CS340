@@ -30,7 +30,7 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 <div>
 	<table>
 		<tr>
-			<td>Videogames Filtered By Developer</td>
+			<td>Videogames Filtered By Platform</td>
 		</tr>
 		<tr>
 			<td>Title</td>
@@ -40,18 +40,19 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPS
 			<td>Developer</td>
 		</tr>
 		<?php
-			if(!($stmt = $mysqli->prepare("SELECT vg.game_id, vg.title, vg.releaseMonth, vg.releaseDay, vg.releaseYear, g.name, d.name, gs.title FROM video_game vg
-														LEFT JOIN game_genres gg ON gg.game_id = vg.game_id
-														LEFT JOIN genre g ON g.genre_id = gg.genre_id
-														LEFT JOIN developer d ON vg.developer = d.developer_id
-														LEFT JOIN game_series gs ON vg.gameSeries = gs.series_id
-														WHERE d.developer_id = ?
-														ORDER BY vg.title ASC"))){
+			if(!($stmt = $mysqli->prepare('SELECT vg.game_id, vg.title, vg.releaseMonth, vg.releaseDay, vg.releaseYear, g.name, d.name, gs.title FROM platform p
+											LEFT JOIN games_platforms gp ON p.platform_id = gp.platform_id
+											LEFT JOIN video_game vg ON gp.game_id = vg.game_id
+											LEFT JOIN game_genres gg ON gg.game_id = vg.game_id
+											LEFT JOIN genre g ON g.genre_id = gg.genre_id
+											LEFT JOIN developer d ON vg.developer = d.developer_id
+											LEFT JOIN game_series gs ON vg.gameSeries = gs.series_id
+											WHERE p.platform_id  = ?'))){
 				echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 			}
 
 			//Bound the ? from above to the integer below
-			if(!($stmt->bind_param("i",$_POST['developer']))){
+			if(!($stmt->bind_param("i",$_POST['platform']))){
 				echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 			}
 

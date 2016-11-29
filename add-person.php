@@ -33,6 +33,10 @@
 		}
 	</style>
 	<body>
+	
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
 
 <?php
 	if (!($stmt = $mysqli->prepare("INSERT INTO people (firstName, lastName, birthMonth, birthDay, birthYear) VALUES (?, ?, ?, ?, ?)"))){

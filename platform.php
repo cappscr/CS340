@@ -9,6 +9,27 @@
 
 <!DOCTYPE html>
 <html>
+
+	<style>
+			a.button {
+				-webkit-appearance: button;
+				-moz-appearance: button;
+				appearance: button;
+
+				text-decoration: none;
+				color: initial;
+			}
+			
+			.submitLink {
+				background-color: transparent;
+				text-decoration: underline;
+				font-size: medium;
+				border: none;
+				color: blue;
+				cursor: pointer;
+			}
+	</style>
+
 	<head>
 		<!-- Head information here -->
 		<style>
@@ -22,6 +43,7 @@
 		</style>
 	</head>
 	<body>
+<<<<<<< HEAD
 
 	<!-- Row of navigation buttons -->
 		<div>
@@ -38,6 +60,13 @@
 		</div>
 		<br />
 
+=======
+	
+	<div>
+		<?php include 'navBar.php'; ?>
+	</div>
+	
+>>>>>>> James-Branch
 		<h1>Platforms</h1>
 
 		<!-- Form for adding a video game platform to the database -->
@@ -87,11 +116,20 @@
 					<td><strong>Graphics Card</strong>
 					<td><strong>Hard Drive</strong>
 					<td><strong>RAM</strong>
+					<td><strong>Number of Games</strong></td>
 				</tr>
 			</thead>
 <?php
+<<<<<<< HEAD
 	// Query used to select all the basic platform information from the platform table
 	$query = "SELECT platform_id, name, manufacturer, cost, releaseMonth, releaseDay, releaseYear, graphics, hardDrive, RAM FROM platform";
+=======
+	//Something not quite right. iOS has 1 too many games and 360 has 1 too many. This exact query runs correctly on onid though
+	$query = 'SELECT p.platform_id, p.name, p.manufacturer, p.cost, p.releaseMonth, p.releaseDay, p.releaseYear, p.graphics, p.hardDrive, p.RAM, COUNT(vg.game_id) FROM platform p
+				LEFT JOIN games_platforms gp ON p.platform_id = gp.platform_id
+				LEFT JOIN video_game vg ON gp.game_id = vg.game_id
+				GROUP BY p.name';
+>>>>>>> James-Branch
 
 	// Prepare the SQL statment for execution
 	if(!($stmt = $mysqli->prepare($query))){
@@ -102,14 +140,30 @@
 		echo "Execute failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
+<<<<<<< HEAD
 	// Bind results to php variables
 	if(!$stmt->bind_result($id, $name, $manufacturer, $cost, $month, $day, $year, $graphics, $hardDrive, $RAM)){
+=======
+	if(!$stmt->bind_result($id, $name, $manufacturer, $cost, $month, $day, $year, $graphics, $hardDrive, $RAM, $gameCount)){
+>>>>>>> James-Branch
 		echo "Bind failed: " . $stmt->errno . " " . $stmt->error;
 	}
 
 	// Loop through results and output html to build a table
 	while($stmt->fetch()){
-		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n" . $manufacturer . "\n</td>\n<td>\n" . $cost . "\n</td>\n<td>\n" . $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n" . $graphics . "\n</td>\n<td>\n" . $hardDrive . "\n</td>\n<td>\n" . $RAM . "\n</td>\n<td>\n<form action='/~cappsc/edit-platform.php' method='post'>\n <input type='submit' value='Edit'>\n <input type='hidden' name='id' value='" . $id . "'>\n<input type='hidden' name='name' value='" . $name . "'>\n<input type='hidden' name='manufacturer' value='" . $manufacturer . "'>\n<input type='hidden' name='cost' value='" . $cost . "'>\n<input type='hidden' name='month' value='" . $month . "'>\n<input type='hidden' name='day' value = '" . $day . "'>\n<input type='hidden' name='year' value='" . $year . "'>\n<input type='hidden' name='graphics' value='" . $graphics . "'>\n<input type='hidden' name='hardDrive' value='" . $hardDrive . "'>\n<input type='hidden' name='RAM' value='" . $RAM . "'>\n</form>\n<form action='/~cappsc/delete-platform.php' method='post'>\n<input type='hidden' name='id' value='" . $id . "'>\n<input type='submit' value='Delete'>\n</form>\n</td>\n</tr>";
+		echo "<tr>\n<td>\n" . $name . "\n</td>\n<td>\n" 
+				. $manufacturer . "\n</td>\n<td>\n" 
+				. $cost . "\n</td>\n<td>\n" 
+				. $month . "/" . $day . "/" . $year . "\n</td>\n<td>\n" 
+				. $graphics . "\n</td>\n<td>\n" 
+				. $hardDrive . "\n</td>\n<td>\n" 
+				. $RAM 
+				. "</td>\n<td>\n" . 
+				'<form method = "post" action = "gamePlatformFilter.php" >
+				<input type = "submit" class = "submitLink" value = "' . $gameCount . '" />
+				<input type = "hidden" name = "platform" value = ' . $id . ' />
+				</form>'
+				. "\n</td>\n<td>\n<form action='/~cappsc/edit-platform.php' method='post'>\n <input type='submit' value='Edit'>\n <input type='hidden' name='id' value='" . $id . "'>\n<input type='hidden' name='name' value='" . $name . "'>\n<input type='hidden' name='manufacturer' value='" . $manufacturer . "'>\n<input type='hidden' name='cost' value='" . $cost . "'>\n<input type='hidden' name='month' value='" . $month . "'>\n<input type='hidden' name='day' value = '" . $day . "'>\n<input type='hidden' name='year' value='" . $year . "'>\n<input type='hidden' name='graphics' value='" . $graphics . "'>\n<input type='hidden' name='hardDrive' value='" . $hardDrive . "'>\n<input type='hidden' name='RAM' value='" . $RAM . "'>\n</form>\n<form action='/~cappsc/delete-platform.php' method='post'>\n<input type='hidden' name='id' value='" . $id . "'>\n<input type='submit' value='Delete'>\n</form>\n</td>\n</tr>";
 	}
 
 	$stmt->close();

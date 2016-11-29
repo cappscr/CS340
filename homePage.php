@@ -14,6 +14,18 @@ if($mysqli->connect_errno){
 
 <!DOCTYPE html>
 <html>
+
+	<style>
+			a.button {
+				-webkit-appearance: button;
+				-moz-appearance: button;
+				appearance: button;
+
+				text-decoration: none;
+				color: initial;
+			}
+	</style>
+
 	<head>
 		<style>
 			a.button {
@@ -25,6 +37,11 @@ if($mysqli->connect_errno){
 			}
 		</style>
 	</head>
+	
+	<div>
+		<?php include 'navBar.php'; ?>
+	</div>
+	
 	<body>
 		<!-- Row of navigation buttons -->
 		<div>
@@ -43,6 +60,7 @@ if($mysqli->connect_errno){
 		</div>
 		<br />
 		<h1>Greatest Videogame Database Ever</h1>
+<<<<<<< HEAD
 <!--
 		<table>
 			<caption>What would you like to search for?<caption>
@@ -58,6 +76,9 @@ if($mysqli->connect_errno){
 				<td><input type = "submit" value = "Lead Programmer" id = "programmer">
 			</tr>
 		</table>
+=======
+		
+>>>>>>> James-Branch
 		<br />
 		<br />
 		

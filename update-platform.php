@@ -33,6 +33,10 @@
 		}
 	</style>
 	<body>
+	
+<div>
+	<?php include 'navBar.php'; ?>
+</div>
 
 <?php
 	if (!($stmt = $mysqli->prepare("UPDATE platform SET name = ?, manufacturer = ?, cost = ?, releaseMonth = ?, releaseDay = ?, releaseYear = ?, graphics = ?, hardDrive = ?, RAM = ? WHERE platform_id = ?"))){
