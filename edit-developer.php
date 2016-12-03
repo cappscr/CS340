@@ -34,7 +34,7 @@
 <div>
 	<?php
 		$developer_id = $_POST['developerID'];
-		echo $developer_id;
+		//echo $developer_id;
 	
 		if(!($stmt = $mysqli->prepare("SELECT name, city FROM developer
 											WHERE developer_id = ?")))

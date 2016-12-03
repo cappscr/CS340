@@ -37,16 +37,7 @@
 
 	<!-- Row of navigation buttons -->
 		<div>
-			<table>
-				<tr>
-					<td><a class="button" href="developer.php">Developers</a></td>
-					<td><a class="button" href="gameSeries.php">Game Series</a></td>
-					<td><a class="button" href="genre.php">Genres</a></td>
-					<td><a class="button" href="people.php">People</a></td>
-					<td><a class="button" href="platform.php">Platforms</a></td>
-					<td><a class="button" href="videogame.php">Video Games</a></td>
-				</tr>
-			</table>
+		<?php include "navBar.php"; ?>
 		</div>
 		<br />
 
@@ -73,7 +64,7 @@
 		<br />
 		<br />
 		<a class="button" href="/~cappsc/game-characters.php">Back to Games Characters</a>
-		<a class="button" href="/~cappsc/homePage.php">Home</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
 
 	</body>
 </html>

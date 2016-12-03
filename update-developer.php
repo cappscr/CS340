@@ -13,23 +13,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
+	<head>
+		<style>
+			a.button {
+			   -webkit-appearance: button;
+			   -moz-appearance: button;
+			   appearance: button;
 
-<style>
-		a.button {
-			-webkit-appearance: button;
-			-moz-appearance: button;
-			appearance: button;
+			   text-decoration: none;
+			   color: initial;
+			}
+		</style>
+	</head>
 
-			text-decoration: none;
-			color: initial;
-		}
-</style>
+	<body>
 
-<body>
-
-<div>
-	<?php include 'navBar.php'; ?>
-</div>
+		<div>
+			<?php include 'navBar.php'; ?>
+		</div>
 
 <?php
 	if(!$mysqli || $mysqli->connect_errno){
@@ -52,5 +53,9 @@
 	}
 ?>
 
-</body>
+		<br />
+		<br />
+		<a class="button" href="/~cappsc/developer.php">Back to Developers</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
+	</body>
 </html>

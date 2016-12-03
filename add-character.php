@@ -59,7 +59,7 @@
 		<br />
 		<br />
 		<a class="button" href="/~cappsc/character.php">Back to Characters</a>
-		<a class="button" href="/~cappsc/homePage.php">Home</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
 
 	</body>
 </html>

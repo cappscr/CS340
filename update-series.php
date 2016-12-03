@@ -30,6 +30,7 @@
 <div>
 	<?php include 'navBar.php'; ?>
 </div>
+<br />
 
 <?php
 	if(!$mysqli || $mysqli->connect_errno){
@@ -47,9 +48,14 @@
 	if(!$stmt->execute()){
 		echo "Execute failed: "  . $stmt->errno . " " . $stmt->error;
 	} else {
-		echo "Editted " . $_POST['title'] . " in game_series";
+		echo "Updated " . $stmt->affected_rows . " rows in game_series";
 	}
 ?>
+
+		<br />
+		<br />
+		<a class="button" href="/~cappsc/game-series.php">Back to Series</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
 
 </body>
 </html>

@@ -1,10 +1,12 @@
 <?php
-//Turn on error reporting
-ini_set('display_errors', 'On');
-//Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","robinjam-db","TJl7rNob9kTbcPSP","robinjam-db");
-if($mysqli->connect_errno){
-	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	// Turn on error reporting
+	ini_set('display_errors', 'On');
+
+	// Connect to database
+	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","cappsc-db","bUPxSJyB1RecNl7q","cappsc-db");
+
+	if($mysqli->connect_errno){
+		echo "Connection error: " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 	}
 ?>
 
@@ -38,64 +40,11 @@ if($mysqli->connect_errno){
 	<?php include 'navBar.php'; ?>
 </div>
 
-<div>
-	<table>
-		<tr>
-			<td>Genres</td>
-		</tr>
-		<tr>
-			<td>Name</td>
-			<td>Number of Games in Genre</td>
-		</tr>
-
-		<?php
-			//Get data from vide_game table
-			if(!($stmt = $mysqli->prepare('SELECT g.genre_id, g.name, COUNT(vg.title) AS "Number of Games" FROM genre g LEFT JOIN
-											game_genres gg ON g.genre_id = gg.genre_id LEFT JOIN
-											video_game vg ON gg.game_id = vg.game_id
-											GROUP BY g.name;')))
-			{
-				echo "Prepare failed: " .$stmt->errno . " " . $stmt->error;
-			}
-			
-			if(!$stmt->execute())
-			{
-				echo "Execute failed: " .$mysqli->connect_errno . " " . $mysqli->connect_errnor;
-			}
-			
-			//save results if you get some
-			if(!$stmt->bind_result($id, $name, $gameCount))
-			{
-				echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
-			}
-			
-			//display results until you run out of stuff to display
-			while($stmt->fetch())
-			{
-				echo "<tr>\n<td>\n" . $name . "</td>\n<td>\n" . 
-				'<form method = "post" action = "gameGenreFilter.php" >
-				<input type = "submit" class = "submitLink" value = "' . $gameCount . '" />
-				<input type = "hidden" name = "genre" value = ' . $id . ' />
-				</form>
-				</td><td>
-				<form method="post" action="editGenreForm.php">' . "\n" . '
-				<input type="submit" value="Edit" />' . "\n" . '
-				<input type = "hidden" name = "genreID" value = ' . $id . ' />' . "\n" . '
-				</form></td><td>' . "\n" . '
-				<form method="post" action="deleteGenre.php">' . "\n" . '
-				<input type="submit" value="Delete" />' . "\n" . '
-				<input type = "hidden" name = "genreID" value = ' . $id . ' />' . "\n" . '
-				</form></td>';
-			}
-			
-			$stmt->close();
-			
-		?>
-	</table>
-</div>
+<br />
+<br />
 
 <div>
-	<form method = "post" action = "addGenre.php">
+	<form method = "post" action = "add-genre.php">
 		<fieldset>
 			<legend>Enter information for the new genre</legend>
 			<p>Name: <input type = "text" name = "name"/></p>
@@ -134,6 +83,65 @@ if($mysqli->connect_errno){
 		</fieldset>
 		<input type="submit" value="Run Filter" />
 	</form>
+</div>
+
+<br />
+<br />
+
+<div>
+	<table>
+		<tr>
+			<td>Genres</td>
+		</tr>
+		<tr>
+			<td>Name</td>
+			<td>Number of Games in Genre</td>
+		</tr>
+
+<?php
+			//Get data from vide_game table
+			if(!($stmt = $mysqli->prepare('SELECT g.genre_id, g.name, COUNT(vg.title) AS "Number of Games" FROM genre g LEFT JOIN
+											game_genres gg ON g.genre_id = gg.genre_id LEFT JOIN
+											video_game vg ON gg.game_id = vg.game_id
+											GROUP BY g.name;')))
+			{
+				echo "Prepare failed: " .$stmt->errno . " " . $stmt->error;
+			}
+			
+			if(!$stmt->execute())
+			{
+				echo "Execute failed: " .$mysqli->connect_errno . " " . $mysqli->connect_errnor;
+			}
+			
+			//save results if you get some
+			if(!$stmt->bind_result($id, $name, $gameCount))
+			{
+				echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+			}
+			
+			//display results until you run out of stuff to display
+			while($stmt->fetch())
+			{
+				echo "<tr>\n<td>\n" . $name . "</td>\n<td>\n" . 
+				'<form method = "post" action = "gameGenreFilter.php" >
+				<input type = "submit" class = "submitLink" value = "' . $gameCount . '" />
+				<input type = "hidden" name = "genre" value = ' . $id . ' />
+				</form>
+				</td><td>
+				<form method="post" action="edit-genre.php">' . "\n" . '
+				<input type="submit" value="Edit" />' . "\n" . '
+				<input type = "hidden" name = "genreID" value = ' . $id . ' />' . "\n" . '
+				</form></td><td>' . "\n" . '
+				<form method="post" action="delete-genre.php">' . "\n" . '
+				<input type="submit" value="Delete" />' . "\n" . '
+				<input type = "hidden" name = "genreID" value = ' . $id . ' />' . "\n" . '
+				</form></td>';
+			}
+			
+			$stmt->close();
+			
+		?>
+	</table>
 </div>
 
 </body>

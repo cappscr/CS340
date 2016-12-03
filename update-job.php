@@ -33,6 +33,10 @@
 		}
 	</style>
 	<body>
+		<div>
+			<?php include 'navBar.php'; ?>
+		</div>
+		<br />
 
 <?php
 	if (!($stmt = $mysqli->prepare("UPDATE job SET name = ? WHERE job_id = ?"))){
@@ -55,7 +59,7 @@
 		<br />
 		<br />
 		<a class="button" href="/~cappsc/job.php">Back to Jobs</a>
-		<a class="button" href="/~cappsc/homePage.php">Home</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
 
 	</body>
 </html>

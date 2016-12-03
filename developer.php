@@ -39,16 +39,58 @@
 <div>
 	<?php include 'navBar.php'; ?>
 </div>
+<br />
+<h1>Developers</h1>
+<br />
+<div>
+	<form method = "post" action = "add-developer.php">
+		<fieldset>
+			<legend>Enter information for the new developer</legend>
+			<p>Name: <input type = "text" name = "name"/></p>
+			<p>City: <input type = "text" name = "city"/></p>
+			<p><input type = "submit" value = "Add Developer"/></p>
+		</fieldset>
+	</form>
+</div>
 
+<div>
+	<form method="post" action="gameDevFilter.php">
+		<fieldset>
+			<legend>See what games a developer has made</legend>
+				<select name="developer">
+					<?php
+					//This block builds a dropdown menu 
+
+					//Get id and name for each developer
+					if(!($stmt = $mysqli->prepare("SELECT developer_id, name FROM developer"))){
+						echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+					}
+
+					if(!$stmt->execute()){
+						echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+					}
+					//Store the results as described below
+					if(!$stmt->bind_result($id, $dname)){
+						echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+					}
+					//while there are new results, keep adding to the list
+					while($stmt->fetch()){
+						echo '<option value=" '. $id . ' "> ' . $dname . '</option>\n';
+					}
+					$stmt->close();
+				?>
+				</select>
+		</fieldset>
+		<input type="submit" value="See Games" />
+	</form>
+</div>
+<br />
 <div>
 	<table>
 		<tr>
-			<td>Developers</td>
-		</tr>
-		<tr>
-			<td>Name</td>
-			<td>City</td>
-			<td>Number of Games</td>
+			<td><strong>Name</strong></td>
+			<td><strong>City</strong></td>
+			<td><strong>Number of Games</strong></td>
 		</tr>
 <?php
 	//Get data from vide_game table
@@ -94,49 +136,5 @@
 ?>
 	</table>
 </div>
-
-<div>
-	<form method = "post" action = "add-developer.php">
-		<fieldset>
-			<legend>Enter information for the new developer</legend>
-			<p>Name: <input type = "text" name = "name"/></p>
-			<p>City: <input type = "text" name = "city"/></p>
-			<p><input type = "submit" value = "Add Developer"/></p>
-		</fieldset>
-	</form>
-</div>
-
-<div>
-	<form method="post" action="gameDevFilter.php">
-		<fieldset>
-			<legend>See what games a developer has made</legend>
-				<select name="developer">
-					<?php
-					//This block builds a dropdown menu 
-
-					//Get id and name for each developer
-					if(!($stmt = $mysqli->prepare("SELECT developer_id, name FROM developer"))){
-						echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
-					}
-
-					if(!$stmt->execute()){
-						echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
-					}
-					//Store the results as described below
-					if(!$stmt->bind_result($id, $dname)){
-						echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
-					}
-					//while there are new results, keep adding to the list
-					while($stmt->fetch()){
-						echo '<option value=" '. $id . ' "> ' . $dname . '</option>\n';
-					}
-					$stmt->close();
-				?>
-				</select>
-		</fieldset>
-		<input type="submit" value="See Games" />
-	</form>
-</div>
-
 </body>
 </html>

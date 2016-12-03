@@ -27,6 +27,10 @@
 	</head>
 	<body>
 
+		<div>
+			<?php include 'navBar.php'; ?>
+		</div>
+		<br />
 <?php
 		echo "<form action='update-job.php' method='post'>";
 		echo "\n<fieldset>";

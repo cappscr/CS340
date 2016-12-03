@@ -33,7 +33,7 @@ Class:      Oregon State University CS 340
 <div>
 	<?php include 'navBar.php'; ?>
 </div>
-
+<br />
 <div>
 		<h1>Characters</h1>
 
@@ -81,10 +81,10 @@ Class:      Oregon State University CS 340
 
 		
 		<div>
-	<form method = "post" action = "addGameCharacter.php">
+	<form method = "post" action = "add-gcharacter.php">
 		<legend>Select a character and game you would like to pair</legend>
 		
-		<select name = "gameID">
+		<select name = "gid">
 				<?php
 					//This block builds a dropdown menu 
 
@@ -108,7 +108,7 @@ Class:      Oregon State University CS 340
 				?>
 		</select>
 		
-		<select name = "characterID">
+		<select name = "cid">
 				<?php
 					//This block builds a dropdown menu 
 

@@ -30,6 +30,8 @@
 <div>
 	<?php include 'navBar.php'; ?>
 </div>
+<br />
+<br />
 
 <?php
 if(!$mysqli || $mysqli->connect_errno){
@@ -48,6 +50,11 @@ if(!$stmt->execute()){
 	echo "Added " . $stmt->affected_rows . " rows to genre.";
 }
 ?>
+
+<br />
+<br />
+<a class="button" href="/~cappsc/genre.php">Back to Genres</a>
+<a class="button" href="/~cappsc/home.php">Home</a>
 
 </body>
 </html>

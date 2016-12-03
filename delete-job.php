@@ -34,6 +34,11 @@
 	</style>
 	<body>
 
+		<div>
+			<?php include 'navBar.php'; ?>
+		</div>
+		<br />
+
 <?php
 	if (!($stmt = $mysqli->prepare("DELETE FROM job WHERE job_id = ?"))){
 		echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;
@@ -55,7 +60,7 @@
 		<br />
 		<br />
 		<a class="button" href="/~cappsc/job.php">Back to Jobs</a>
-		<a class="button" href="/~cappsc/homePage.php">Home</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
 
 	</body>
 </html>

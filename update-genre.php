@@ -30,6 +30,7 @@
 <div>
 	<?php include 'navBar.php'; ?>
 </div>
+<br />
 
 <?php
 	if(!$mysqli || $mysqli->connect_errno){
@@ -50,6 +51,11 @@
 		echo "Updated " . $_POST['name'] . " in genre";
 	}
 ?>
+
+<br />
+<br />
+<a class="button" href="/~cappsc/genre.php">Back to Genres</a>
+<a class="button" href="/~cappsc/home.php">Home</a>
 
 </body>
 </html>

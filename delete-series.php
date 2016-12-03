@@ -30,10 +30,11 @@
 <div>
 	<?php include 'navBar.php'; ?>
 </div>
+<br />
 
 <?php
 	$series_id = $_POST['sID'];
-	echo $series_id;
+	//echo $series_id;
 	
 	if(!($stmt = $mysqli->prepare("DELETE FROM game_series WHERE series_id = ?"))){
 		echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
@@ -52,6 +53,11 @@
 		echo "You have deleted from the game_series table";
 	$stmt->close();
 ?>
+
+		<br />
+		<br />
+		<a class="button" href="/~cappsc/game-series.php">Back to Series</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
 
 </body>
 </html>

@@ -82,9 +82,13 @@
 	if(!$stmt->execute()){
 		echo "Execute failed: "  . $stmt->errno . " " . $stmt->error;
 	} else {
-		echo "Added " . $_POST['title'] . " to video_game.";
+		echo "Added " . $stmt->affected_rows . " to video_game.";
 	}
 ?>
 
-</body>
+		<br />
+		<br />
+		<a class="button" href="/~cappsc/videogame.php">Back to Games</a>
+		<a class="button" href="/~cappsc/home.php">Home</a>
+	</body>
 </html>

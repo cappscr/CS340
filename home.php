@@ -37,27 +37,12 @@ if($mysqli->connect_errno){
 			}
 		</style>
 	</head>
-	
-	<div>
-		<?php include 'navBar.php'; ?>
-	</div>
-	
 	<body>
-		<!-- Row of navigation buttons -->
+
 		<div>
-			<table>
-				<tr>
-					<td><a class="button" href="character.php">Characters</a></td>
-					<td><a class="button" href="developer.php">Developers</a></td>
-					<td><a class="button" href="gameSeries.php">Game Series</a></td>
-					<td><a class="button" href="genre.php">Genres</a></td>
-					<td><a class="button" href="job.php">Jobs</a></td>
-					<td><a class="button" href="people.php">People</a></td>
-					<td><a class="button" href="platform.php">Platforms</a></td>
-					<td><a class="button" href="videogame.php">Video Games</a></td>
-				</tr>
-			</table>
+			<?php include 'navBar.php'; ?>
 		</div>
+	
 		<br />
 		<h1>Greatest Videogame Database Ever</h1>
 

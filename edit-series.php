@@ -30,11 +30,12 @@
 <div>
 	<?php include 'navBar.php'; ?>
 </div>
+<br />
 
 <div>
 	<?php
 		$series_id = $_POST['sID'];
-		echo $series_id;
+		//echo $series_id;
 	
 		if(!($stmt = $mysqli->prepare("SELECT title FROM game_series
 											WHERE series_id = ?")))
